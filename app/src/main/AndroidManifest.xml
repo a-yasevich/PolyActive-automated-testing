@@ -11,7 +11,13 @@
         android:theme="@style/Theme.PolyActive">
 
         <activity android:name=".MainActivity"
-            android:theme="@style/Theme.PolyActive"/>
+            android:theme="@style/Theme.PolyActive"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 
