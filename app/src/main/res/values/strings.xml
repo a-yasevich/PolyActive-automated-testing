@@ -6,4 +6,8 @@
     <string name="tab_item_group_1">Группа 1</string>
     <string name="tab_item_group_2">Группа 2</string>
     <string name="tab_item_group_3">Группа 3</string>
+    <string name="language_item">language item</string>
+    <string name="theme_item">Theme item</string>
+    <string name="language_field">Language</string>
+    <string name="theme_field">Тема</string>
 </resources>
