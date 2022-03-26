@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
+import com.polyactiveteam.polyactive.fragments.FeedFragment
 
 class MainActivity : AppCompatActivity() {
     private val fragmentManager: FragmentManager = supportFragmentManager
