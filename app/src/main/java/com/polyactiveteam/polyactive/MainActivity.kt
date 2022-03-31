@@ -1,25 +1,27 @@
 package com.polyactiveteam.polyactive
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.fragments.FeedFragment
+import com.polyactiveteam.polyactive.fragments.SettingFragment
 
 class MainActivity : AppCompatActivity() {
+
+    // С binding почему-то не работает bottomNavigation
+    // private lateinit var binding: ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val feedFragment: Fragment = FeedFragment()
+    private val settingFragment: Fragment = SettingFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val toast = Toast(applicationContext)
+        //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
-        toast.setText("Application started successful!")
-        toast.show()
-
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -28,11 +30,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.action_feed -> {
                     setFragment(feedFragment)
-                    // сейчас при выборе ленты новостей она останется выбраной до конца
-                    // поскольку при нажатии на другие кнопки снизу ничего не происходит
                 }
                 R.id.action_settings -> {
-                    //TODO
+                    setFragment(settingFragment)
                 }
             }
             true

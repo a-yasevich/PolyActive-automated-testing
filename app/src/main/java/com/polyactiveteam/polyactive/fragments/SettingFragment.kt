@@ -1,10 +1,11 @@
-package com.polyactiveteam.polyactive
+package com.polyactiveteam.polyactive.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.polyactiveteam.polyactive.R
 
 class SettingFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
