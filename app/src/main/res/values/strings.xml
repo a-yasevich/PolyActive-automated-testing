@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">PolyActive</string>
-    <string name="menu_title_profile">Profile</string>
-    <string name="menu_title_feed">Feed</string>
-    <string name="menu_title_settings">Settings</string>
+    <string name="menu_title_profile">Профиль</string>
+    <string name="menu_title_feed">Новости</string>
+    <string name="menu_title_settings">Настройка</string>
     <string name="tab_item_group_1">Группа 1</string>
     <string name="tab_item_group_2">Группа 2</string>
     <string name="tab_item_group_3">Группа 3</string>
-    <string name="language_item">language item</string>
-    <string name="theme_item">Theme item</string>
-    <string name="language_field">Language</string>
+    <string name="language_item">Иконка выбора языка</string>
+    <string name="theme_item">Иконка выбора темы</string>
+    <string name="language_field">Язык</string>
     <string name="theme_field">Тема</string>
 </resources>
