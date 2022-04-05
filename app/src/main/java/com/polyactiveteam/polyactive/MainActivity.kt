@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.fragments.FeedFragment
-import com.polyactiveteam.polyactive.fragments.SettingFragment
+import com.polyactiveteam.polyactive.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     // private lateinit var binding: ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val feedFragment: Fragment = FeedFragment()
-    private val settingFragment: Fragment = SettingFragment()
+    private val settingFragment: Fragment = SettingsFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
