@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.polyactiveteam.polyactive.R
@@ -22,6 +21,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        adapter.fragmentManager = parentFragmentManager
         binding = FragmentFeedBinding.inflate(inflater, container, false)
         initNewsFeed()
         return binding.root
@@ -35,7 +35,8 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                     R.drawable.news1,
                     "Новый RecycleView",
                     "Команда PolyActive добавила RecycleView к своему проекту",
-                    1648329900
+                    1648329900,
+                    0
                 )
             ) // Заглушка
             adapter.addItem(
@@ -43,7 +44,8 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                     R.drawable.heart_plug,
                     "Крутая новость",
                     "Новость действительно крутая",
-                    1648375200
+                    1648375200,
+                    0
                 )
             ) // Заглушка
             newsList.adapter = adapter
