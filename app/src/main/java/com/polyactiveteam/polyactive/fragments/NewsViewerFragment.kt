@@ -5,8 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.polyactiveteam.polyactive.R
-import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.databinding.NewsViewerBinding
 import com.polyactiveteam.polyactive.model.News
 
