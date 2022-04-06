@@ -56,7 +56,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         return newsList.size
     }
 
-    fun addItem(news: News) {
-        newsList.add(news)
+    fun addAllItems(news: ArrayList<News>) {
+        newsList.addAll(news)
     }
 }

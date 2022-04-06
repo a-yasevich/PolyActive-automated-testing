@@ -1,7 +1,6 @@
 package com.polyactiveteam.polyactive
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -11,16 +10,12 @@ import com.polyactiveteam.polyactive.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
 
-    // С binding почему-то не работает bottomNavigation
-    // private lateinit var binding: ActivityMainBinding
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val feedFragment: Fragment = FeedFragment()
     private val settingFragment: Fragment = SettingsFragment()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
         bottomNavigation.setOnItemSelectedListener { item ->
