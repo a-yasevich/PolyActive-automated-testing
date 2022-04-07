@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentRegistrationBinding
 
-
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
 
     private lateinit var binding: FragmentRegistrationBinding

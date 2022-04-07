@@ -11,6 +11,7 @@
     <string name="theme_item">Theme Selection Icon</string>
     <string name="language_field">Language</string>
     <string name="theme_field">Theme</string>
+    <string name="news_title">News</string>
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
     <string name="sign_in">Sign In</string>

@@ -11,7 +11,7 @@ import com.polyactiveteam.polyactive.databinding.NewsItemBinding
 import com.polyactiveteam.polyactive.fragments.NewsViewerFragment
 import com.polyactiveteam.polyactive.model.News
 
-class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
 
     private val newsList = ArrayList<News>()
     lateinit var fragmentManager: FragmentManager
@@ -56,7 +56,7 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         return newsList.size
     }
 
-    fun addItem(news: News) {
-        newsList.add(news)
+    fun addAllItems(news: ArrayList<News>) {
+        newsList.addAll(news)
     }
 }

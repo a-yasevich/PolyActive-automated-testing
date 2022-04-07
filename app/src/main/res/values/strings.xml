@@ -10,6 +10,7 @@
     <string name="theme_item">Иконка выбора темы</string>
     <string name="language_field">Язык</string>
     <string name="theme_field">Тема</string>
+    <string name="news_title">Новости</string>
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
     <string name="sign_in">Войти</string>

@@ -9,9 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.polyactiveteam.polyactive.R
 
 class SettingsFragment : Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
