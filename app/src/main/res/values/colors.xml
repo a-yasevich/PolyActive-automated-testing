@@ -4,5 +4,6 @@
     <color name="whisper">#F3F3F9</color>
     <color name="titan_white">#FBFBFF</color>
     <color name="silver">#C4C4C4</color> <!-- Должен иметь 20% прозрачность -->
+    <color name="light_silver">#CDDCDCDC</color>
     <color name="lunar_green">#39453B</color>
 </resources>

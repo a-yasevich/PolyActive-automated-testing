@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_login">
+
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="com.polyactiveteam.polyactive.fragments.LoginFragment">
+        <action
+            android:id="@+id/from_login_to_main"
+            app:destination="@id/fragment_settings"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+
+        <action
+            android:id="@+id/from_login_to_registration"
+            app:destination="@id/fragment_registration" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_registration"
+        android:name="com.polyactiveteam.polyactive.fragments.RegistrationFragment">
+
+        <action
+            android:id="@+id/from_registration_to_login"
+            app:destination="@id/fragment_login"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+
+    <!-- Изменить на фрагмент профиля -->
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="com.polyactiveteam.polyactive.fragments.SettingsFragment">
+    </fragment>
+
+
+    <!--
+        Для выхода в логин из фргамента профиля
+
+       android:id="@+id/фаргемент профиля"
+       android:name="com.polyactiveteam.polyactive.fragments.фрагмент профиля">
+
+        <action
+                android:id="@+id/from_profile_to_login"
+                app:destination="@id/fragment_login"
+                app:popUpTo="@id/nav_graph"
+                app:popUpToInclusive="true"/>
+         -->
+</navigation>

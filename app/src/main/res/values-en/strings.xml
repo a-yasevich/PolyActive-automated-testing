@@ -13,4 +13,10 @@
     <string name="theme_field">Theme</string>
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Create account</string>
+    <string name="editText_login">Login</string>
+    <string name="editText_password">Password</string>
+    <string name="editText_repeat_password">Repeat password</string>
+
 </resources>
