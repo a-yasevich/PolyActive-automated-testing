@@ -13,4 +13,10 @@
     <string name="news_title">Новости</string>
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
+    <string name="sign_in">Войти</string>
+    <string name="register">Регистрация</string>
+    <string name="editText_login">Логин</string>
+    <string name="editText_password">Пароль</string>
+    <string name="editText_repeat_password">Повторите пароль</string>
+
 </resources>
