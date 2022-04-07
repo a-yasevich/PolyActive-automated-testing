@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/forest_green</item>
         <item name="colorOnPrimary">@color/titan_white</item>
         <!-- Secondary brand color. -->
-            <item name="colorSecondary">@color/lunar_green</item>
+        <item name="colorSecondary">@color/lunar_green</item>
         <item name="colorSecondaryVariant">@color/lunar_green</item>
         <item name="colorOnSecondary">@color/titan_white</item>
         <!-- Status bar color. -->

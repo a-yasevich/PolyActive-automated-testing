@@ -10,7 +10,6 @@ import androidx.navigation.fragment.findNavController
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentLoginBinding
 
-
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     lateinit var binding: FragmentLoginBinding

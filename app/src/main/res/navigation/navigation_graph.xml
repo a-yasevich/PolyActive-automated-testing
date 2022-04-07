@@ -34,8 +34,7 @@
     <!-- Изменить на фрагмент профиля -->
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="com.polyactiveteam.polyactive.fragments.SettingsFragment">
-    </fragment>
+        android:name="com.polyactiveteam.polyactive.fragments.SettingsFragment"></fragment>
 
 
     <!--

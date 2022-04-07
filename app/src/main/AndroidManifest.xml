@@ -10,9 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PolyActive">
 
-        <activity android:name=".MainActivity"
-            android:theme="@style/Theme.PolyActive"
-            android:exported="true">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.PolyActive">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

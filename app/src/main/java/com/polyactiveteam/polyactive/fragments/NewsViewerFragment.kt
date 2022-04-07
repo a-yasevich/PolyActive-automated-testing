@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.polyactiveteam.polyactive.databinding.NewsViewerBinding
 import com.polyactiveteam.polyactive.model.News
 
-
 class NewsViewerFragment(private val news: News) : Fragment() {
 
     lateinit var binding: NewsViewerBinding
