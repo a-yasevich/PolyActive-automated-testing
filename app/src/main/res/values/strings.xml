@@ -18,5 +18,12 @@
     <string name="editText_login">Логин</string>
     <string name="editText_password">Пароль</string>
     <string name="editText_repeat_password">Повторите пароль</string>
-
+    <string name="setNewLastName">Введите новую фамилию</string>
+    <string name="defaultName">Steve Rogers</string>
+    <string name="setNewName">Введите новое имя</string>
+    <string name="changeButton">Изменить</string>
+    <string name="adapters_name">Адаптеры</string>
+    <string name="students_brigades_name">Студотряды</string>
+    <string name="prof_name">Проф</string>
+    <string name="profileImage">Фото профиля</string>
 </resources>

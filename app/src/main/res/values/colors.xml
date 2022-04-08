@@ -6,4 +6,6 @@
     <color name="silver">#C4C4C4</color> <!-- Должен иметь 20% прозрачность -->
     <color name="light_silver">#CDDCDCDC</color>
     <color name="lunar_green">#39453B</color>
+    <color name="light_grey">#ececec</color>
+    <color name="black">#000000</color>
 </resources>

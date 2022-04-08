@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.fragments.FeedFragment
+import com.polyactiveteam.polyactive.fragments.ProfileFragment
 import com.polyactiveteam.polyactive.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val feedFragment: Fragment = FeedFragment()
     private val settingFragment: Fragment = SettingsFragment()
+    private val profileFragment = ProfileFragment()
 
     private lateinit var navController: NavController
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.action_profile -> {
                     //Посмотрите в navigation_graph - комментарий для перехода в fragment_login
                     //Переместить строку из fragment_settings в fragment_profile
-                    //TODO
+                    setFragment(profileFragment)
                 }
                 R.id.action_feed -> {
                     setFragment(feedFragment)
