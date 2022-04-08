@@ -20,4 +20,11 @@
     <string name="editText_password">Password</string>
     <string name="editText_repeat_password">Repeat password</string>
 
+    <string name="setNewLastName">New lastname</string>
+    <string name="defaultName">Steve Rogers</string>
+    <string name="setNewName">New name</string>
+    <string name="changeButton">Change</string>
+    <string name="adapters_name">Adapters</string>
+    <string name="students_brigades_name">Brigades</string>
+    <string name="prof_name">Prof</string>
 </resources>

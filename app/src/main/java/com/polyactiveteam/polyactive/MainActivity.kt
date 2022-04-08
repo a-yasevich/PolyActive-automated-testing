@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.fragments.FeedFragment
+import com.polyactiveteam.polyactive.fragments.ProfileFragment
 import com.polyactiveteam.polyactive.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
