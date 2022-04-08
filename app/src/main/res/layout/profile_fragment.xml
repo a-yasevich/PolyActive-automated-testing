@@ -28,15 +28,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+
+                <androidx.cardview.widget.CardView
                     android:id="@+id/mainImage"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:layout_gravity="center"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:src="@mipmap/ic_launcher"
+                    app:cardCornerRadius="100dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_person"
+                        android:contentDescription="@string/profileImage" />
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/mainName"
@@ -56,7 +65,9 @@
                     android:layout_marginTop="30dp"
                     android:background="@color/light_grey"
                     android:hint="@string/setNewName"
+                    android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
                     android:textSize="30sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/mainImage" />
@@ -68,7 +79,9 @@
                     android:layout_marginTop="30dp"
                     android:background="@color/light_grey"
                     android:hint="@string/setNewLastName"
+                    android:minHeight="48dp"
                     android:paddingStart="10dp"
+                    android:paddingEnd="0dp"
                     android:textSize="30sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/setName" />
@@ -79,10 +92,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/change_button_effect"
-                    android:textColor="@color/black"
-                    android:textAllCaps="false"
+                    android:background="@drawable/ic_change_button"
                     android:text="@string/changeButton"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -104,24 +117,33 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/adapters"
                             android:layout_width="0dp"
-                            app:layout_constraintWidth_percent="0.7"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
+                            android:background="@color/titan_white"
                             android:paddingTop="10dp"
-                            android:paddingStart="10dp"
                             android:paddingBottom="10dp"
-                            android:background="@color/forest_green"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintWidth_percent="0.7">
 
-                            <de.hdodenhof.circleimageview.CircleImageView
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/adaptersImage"
                                 android:layout_width="75dp"
                                 android:layout_height="75dp"
-                                android:src="@drawable/adapters"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                app:cardCornerRadius="100dp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/adapters_name"
+                                    android:src="@drawable/adapters" />
+                            </androidx.cardview.widget.CardView>
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -136,30 +158,37 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/brigades"
                             android:layout_width="0dp"
-                            app:layout_constraintWidth_percent="0.7"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
-                            android:paddingTop="10dp"
-                            android:paddingStart="10dp"
-                            android:paddingBottom="10dp"
-
                             android:background="@color/titan_white"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintStart_toStartOf="@id/adapters"
-                            app:layout_constraintTop_toBottomOf="@id/adapters">
+                            app:layout_constraintTop_toBottomOf="@id/adapters"
+                            app:layout_constraintWidth_percent="0.7">
 
-                            <de.hdodenhof.circleimageview.CircleImageView
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/brigadesImage"
                                 android:layout_width="75dp"
                                 android:layout_height="75dp"
-                                android:src="@drawable/students_brigades"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                app:cardCornerRadius="100dp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/students_brigades_name"
+                                    android:src="@drawable/students_brigades" />
+                            </androidx.cardview.widget.CardView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/students_brigades_name"
                                 android:layout_marginStart="20dp"
+                                android:text="@string/students_brigades_name"
                                 android:textSize="25sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/brigadesImage"
@@ -169,24 +198,32 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/prof"
                             android:layout_width="0dp"
-                            app:layout_constraintWidth_percent="0.7"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
                             android:layout_marginBottom="30dp"
-                            android:paddingTop="10dp"
-                            android:paddingStart="10dp"
-                            android:paddingBottom="10dp"
                             android:background="@color/titan_white"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintStart_toStartOf="@id/brigades"
-                            app:layout_constraintTop_toBottomOf="@id/brigades">
+                            app:layout_constraintTop_toBottomOf="@id/brigades"
+                            app:layout_constraintWidth_percent="0.7">
 
-                            <de.hdodenhof.circleimageview.CircleImageView
+                            <androidx.cardview.widget.CardView
                                 android:id="@+id/profImage"
                                 android:layout_width="75dp"
                                 android:layout_height="75dp"
-                                android:src="@drawable/prof"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="10dp"
+                                app:cardCornerRadius="100dp"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/prof_name"
+                                    android:src="@drawable/prof" />
+                            </androidx.cardview.widget.CardView>
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -198,6 +235,8 @@
                                 app:layout_constraintStart_toEndOf="@+id/profImage"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </ScrollView>

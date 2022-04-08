@@ -25,4 +25,5 @@
     <string name="adapters_name">Адаптеры</string>
     <string name="students_brigades_name">Студотряды</string>
     <string name="prof_name">Проф</string>
+    <string name="profileImage">Фото профиля</string>
 </resources>

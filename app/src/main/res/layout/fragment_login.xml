@@ -21,7 +21,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:autofillHints="username"
-        android:background="@drawable/edit_text_login_style"
+        android:background="@drawable/ic_edit_text_login_style"
         android:hint="@string/editText_login"
         android:inputType="text"
         android:paddingStart="15dp"
@@ -34,7 +34,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:autofillHints="password"
-        android:background="@drawable/edit_text_login_style"
+        android:background="@drawable/ic_edit_text_login_style"
         android:hint="@string/editText_password"
         android:inputType="textPassword"
         android:paddingStart="15dp"
@@ -46,7 +46,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:background="@drawable/button_rounded_login_style"
+        android:background="@drawable/ic_button_rounded_login_style"
         android:text="@string/sign_in"
         android:textSize="23sp" />
 
