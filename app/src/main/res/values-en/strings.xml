@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PolyActive</string>
+    <string name="menu_title_profile">Profile</string>
+    <string name="menu_title_feed">News</string>
+    <string name="menu_title_settings">Setting</string>
+    <string name="tab_item_group_1">Group 1</string>
+    <string name="tab_item_group_2">Group 2</string>
+    <string name="tab_item_group_3">Group 3</string>
+    <string name="language_item">Language Selection Icon</string>
+    <string name="theme_item">Theme Selection Icon</string>
+    <string name="language_field">Language</string>
+    <string name="theme_field">Theme</string>
+    <string name="news_title">News</string>
+    <string name="like_image_content_description">like_image</string>
+    <string name="news_image_content_description">news_image</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Create account</string>
+    <string name="editText_login">Login</string>
+    <string name="editText_password">Password</string>
+    <string name="editText_repeat_password">Repeat password</string>
+
+</resources>
