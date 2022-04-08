@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.fragments.FeedFragment
+import com.polyactiveteam.polyactive.fragments.ProfileFragment
 import com.polyactiveteam.polyactive.fragments.SettingsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private val fragmentManager: FragmentManager = supportFragmentManager
     private val feedFragment: Fragment = FeedFragment()
     private val settingFragment: Fragment = SettingsFragment()
+    private val profileFragment = ProfileFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_profile -> {
-                    //TODO
+                    setFragment(profileFragment)
                 }
                 R.id.action_feed -> {
                     setFragment(feedFragment)

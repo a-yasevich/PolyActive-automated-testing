@@ -10,4 +10,13 @@
     <string name="theme_item">Иконка выбора темы</string>
     <string name="language_field">Язык</string>
     <string name="theme_field">Тема</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="setNewLastName">Введите новую фамилию</string>
+    <string name="defaultName">Steve Rogers</string>
+    <string name="setNewName">Введите новое имя</string>
+    <string name="changeButton">Изменить</string>
+    <string name="adapters_name">Адаптеры</string>
+    <string name="students_brigades_name">Студотряды</string>
+    <string name="prof_name">Проф</string>
 </resources>
