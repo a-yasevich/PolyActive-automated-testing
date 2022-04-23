@@ -90,5 +90,4 @@
         app:layout_constraintStart_toStartOf="@+id/language_iv2"
         app:layout_constraintTop_toTopOf="@+id/theme_tv" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
