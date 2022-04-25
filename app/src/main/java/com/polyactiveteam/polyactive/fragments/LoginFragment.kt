@@ -30,7 +30,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSignInLogin.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_main)
+            findNavController().navigate(R.id.from_login_to_feed)
         }
         binding.buttonToRegistration.setOnClickListener {
             findNavController().navigate(R.id.from_login_to_registration)
