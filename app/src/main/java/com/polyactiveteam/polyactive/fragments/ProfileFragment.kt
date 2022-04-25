@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import java.util.*
@@ -18,13 +18,12 @@ class ProfileFragment : Fragment() {
         val user = User("Steve", "Rogers")
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentProfileBinding.inflate(inflater)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         with(binding) {
             userName.text = user.toString()
             profButton.setOnClickListener {
@@ -40,17 +39,20 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonExit.setOnClickListener {
+            findNavController().navigate(R.id.from_profile_to_login)
+        }
+    }
+
     private fun setColor(it: View, group: Groups) {
         when (user.processGroup(group)) {
             Answer.REMOVE -> {
-                it.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.titan_white))
+                it.setBackgroundResource(R.drawable.ic_group_button_deactive)
             }
-            else -> it.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.forest_green
-                )
-            )
+            else -> it.setBackgroundResource(R.drawable.ic_group_button_active)
         }
     }
 
