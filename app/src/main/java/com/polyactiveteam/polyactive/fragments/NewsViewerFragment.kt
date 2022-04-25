@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.polyactiveteam.polyactive.databinding.NewsViewerBinding
+import com.polyactiveteam.polyactive.databinding.FragmentNewsViewerBinding
 import com.polyactiveteam.polyactive.model.News
 
 class NewsViewerFragment(private val news: News) : Fragment() {
 
-    lateinit var binding: NewsViewerBinding
+    lateinit var binding: FragmentNewsViewerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = NewsViewerBinding.inflate(inflater, container, false)
+        binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         with(binding) {
             newsViewerNewsImage.setBackgroundResource(news.imageId)
             newsViewerHeader.text = news.header

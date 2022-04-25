@@ -1,7 +1,5 @@
 package com.polyactiveteam.polyactive.fragments
 
-import android.content.res.Resources
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +7,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.polyactiveteam.polyactive.R
-import com.polyactiveteam.polyactive.databinding.ProfileFragmentBinding
+import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import java.util.*
 
 class ProfileFragment : Fragment() {
-    private lateinit var binding: ProfileFragmentBinding
+
+    private lateinit var binding: FragmentProfileBinding
 
     companion object { //singleton
         val user = User("Steve", "Rogers")
@@ -25,21 +24,16 @@ class ProfileFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ProfileFragmentBinding.inflate(inflater)
+        binding = FragmentProfileBinding.inflate(inflater)
         with(binding) {
-            mainName.text = user.toString()
-            changeButton.setOnClickListener {
-                user.name = setName.text.toString()
-                user.lastName = setLastName.text.toString()
-                mainName.text = user.toString()
-            }
-            prof.setOnClickListener {
+            userName.text = user.toString()
+            profButton.setOnClickListener {
                 setColor(it, Groups.PROF)
             }
-            adapters.setOnClickListener {
+            adaptersButton.setOnClickListener {
                 setColor(it, Groups.ADAPTERS)
             }
-            brigades.setOnClickListener {
+            brigadesButton.setOnClickListener {
                 setColor(it, Groups.BRIGADES)
             }
         }
@@ -51,7 +45,12 @@ class ProfileFragment : Fragment() {
             Answer.REMOVE -> {
                 it.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.titan_white))
             }
-            else -> it.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.forest_green))
+            else -> it.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.forest_green
+                )
+            )
         }
     }
 
