@@ -35,6 +35,36 @@
     <fragment
         android:id="@+id/profile_fragment"
         android:name="com.polyactiveteam.polyactive.fragments.ProfileFragment">
+        <action
+            android:id="@+id/action_profile_fragment_to_fragment_settings"
+            app:destination="@id/settings_fragment" />
+        <action
+            android:id="@+id/action_profile_fragment_to_feed_fragment"
+            app:destination="@id/feed_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/feed_fragment"
+        android:name="com.polyactiveteam.polyactive.fragments.FeedFragment">
+
+        <action
+            android:id="@+id/action_feed_fragment_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_feed_fragment_to_settings_fragment"
+            app:destination="@id/settings_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.polyactiveteam.polyactive.fragments.SettingsFragment">
+
+        <action
+            android:id="@+id/action_fragment_settings_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_settings_fragment_to_feed_fragment"
+            app:destination="@id/feed_fragment" />
     </fragment>
 
 
