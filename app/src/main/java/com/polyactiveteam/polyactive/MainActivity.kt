@@ -1,14 +1,13 @@
 package com.polyactiveteam.polyactive
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.polyactiveteam.polyactive.fragments.FeedFragment
-import com.polyactiveteam.polyactive.fragments.ProfileFragment
-import com.polyactiveteam.polyactive.fragments.SettingsFragment
+import com.polyactiveteam.polyactive.services.LanguageManager
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment(fragment: Fragment) {
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(LanguageManager.updateWithPersisted(base ?: return, "ru"))
     }
 }
