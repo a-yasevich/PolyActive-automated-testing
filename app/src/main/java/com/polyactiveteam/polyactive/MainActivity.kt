@@ -1,24 +1,15 @@
 package com.polyactiveteam.polyactive
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.polyactiveteam.polyactive.fragments.FeedFragment
-import com.polyactiveteam.polyactive.fragments.ProfileFragment
-import com.polyactiveteam.polyactive.fragments.SettingsFragment
+import com.polyactiveteam.polyactive.services.SettingsManager
 
 class MainActivity : AppCompatActivity() {
-
-    private val fragmentManager: FragmentManager = supportFragmentManager
-    private val feedFragment: Fragment = FeedFragment()
-    private val settingFragment: Fragment = SettingsFragment()
-    private val profileFragment: Fragment = ProfileFragment()
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,13 +20,13 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_profile -> {
-                    setFragment(profileFragment)
+                    navController.navigate(R.id.profile_fragment)
                 }
                 R.id.action_feed -> {
-                    setFragment(feedFragment)
+                    navController.navigate(R.id.feed_fragment)
                 }
                 R.id.action_settings -> {
-                    setFragment(settingFragment)
+                    navController.navigate(R.id.settings_fragment)
                 }
             }
             true
@@ -55,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment(fragment: Fragment) {
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(SettingsManager.updateWithPersisted(base ?: return, "ru", false))
     }
 }
