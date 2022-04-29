@@ -15,7 +15,7 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             val plugList = ArrayList<News>()
             plugList.add(
                 News(
-                    R.drawable.news1,
+                    R.drawable.ic_news_plug,
                     "Новый RecycleView",
                     "Команда PolyActive добавила RecycleView к своему проекту",
                     1648329900,
@@ -24,7 +24,7 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             )
             plugList.add(
                 News(
-                    R.drawable.heart_plug,
+                    R.drawable.ic_heart_plug,
                     "Крутая новость",
                     "Новость действительно крутая",
                     1648375200,

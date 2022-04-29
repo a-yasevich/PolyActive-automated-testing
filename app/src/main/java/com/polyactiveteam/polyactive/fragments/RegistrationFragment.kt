@@ -25,7 +25,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSignInRegistration.setOnClickListener {
+        binding.buttonSignInLogin.setOnClickListener {
             findNavController().navigate(R.id.from_registration_to_login)
         }
     }

@@ -8,8 +8,8 @@
         android:id="@+id/fragment_login"
         android:name="com.polyactiveteam.polyactive.fragments.LoginFragment">
         <action
-            android:id="@+id/from_login_to_main"
-            app:destination="@id/profile_fragment"
+            android:id="@+id/from_login_to_feed"
+            app:destination="@id/feed_fragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
 
@@ -27,11 +27,8 @@
             app:destination="@id/fragment_login"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
-
     </fragment>
 
-
-    <!-- Изменить на фрагмент профиля -->
     <fragment
         android:id="@+id/profile_fragment"
         android:name="com.polyactiveteam.polyactive.fragments.ProfileFragment">
@@ -41,6 +38,11 @@
         <action
             android:id="@+id/action_profile_fragment_to_feed_fragment"
             app:destination="@id/feed_fragment" />
+        <action
+            android:id="@+id/from_profile_to_login"
+            app:destination="@id/fragment_login"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -67,17 +69,4 @@
             app:destination="@id/feed_fragment" />
     </fragment>
 
-
-    <!--
-        Для выхода в логин из фргамента профиля
-
-       android:id="@+id/фаргемент профиля"
-       android:name="com.polyactiveteam.polyactive.fragments.фрагмент профиля">
-
-        <action
-                android:id="@+id/from_profile_to_login"
-                app:destination="@id/fragment_login"
-                app:popUpTo="@id/nav_graph"
-                app:popUpToInclusive="true"/>
-         -->
 </navigation>

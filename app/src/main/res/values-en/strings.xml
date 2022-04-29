@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PolyActive</string>
-    <string name="logo_name">PolyActive</string>
     <string name="menu_title_profile">Profile</string>
     <string name="menu_title_feed">News</string>
     <string name="menu_title_settings">Setting</string>
@@ -29,4 +28,7 @@
     <string name="students_brigades_name">Brigades</string>
     <string name="prof_name">Prof</string>
     <string name="profileImage">Profile image</string>
+    <string name="news_image">news_image</string>
+    <string name="like">like</string>
+    <string name="exit">Exit</string>
 </resources>

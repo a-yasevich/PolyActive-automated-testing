@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PolyActive</string>
-    <string name="logo_name">PolyActive</string>
     <string name="menu_title_profile">Профиль</string>
     <string name="menu_title_feed">Новости</string>
     <string name="menu_title_settings">Настройка</string>
@@ -27,4 +26,7 @@
     <string name="students_brigades_name">Студотряды</string>
     <string name="prof_name">Проф</string>
     <string name="profileImage">Фото профиля</string>
+    <string name="news_image">news_image</string>
+    <string name="like">like</string>
+    <string name="exit">Выйти</string>
 </resources>
