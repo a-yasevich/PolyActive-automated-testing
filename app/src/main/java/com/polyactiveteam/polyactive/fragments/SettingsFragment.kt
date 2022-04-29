@@ -1,14 +1,13 @@
 package com.polyactiveteam.polyactive.fragments
 
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.polyactiveteam.polyactive.databinding.FragmentSettingsBinding
-import com.polyactiveteam.polyactive.services.LanguageManager
+import com.polyactiveteam.polyactive.services.SettingsManager
 
 class SettingsFragment : Fragment() {
     lateinit var binding: FragmentSettingsBinding
@@ -27,18 +26,20 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.languageIv1.setOnClickListener {
-            LanguageManager.updateLanguage("ru", view.context)
+            SettingsManager.updateLanguage("ru", view.context)
             activity?.recreate()
         }
         binding.languageIv2.setOnClickListener {
-            LanguageManager.updateLanguage("en", view.context)
+            SettingsManager.updateLanguage("en", view.context)
             activity?.recreate()
         }
         binding.themeIv1.setOnClickListener {
-            TODO()
+            SettingsManager.updateTheme(false, view.context)
+            activity?.recreate()
         }
         binding.themeIv2.setOnClickListener {
-            TODO()
+            SettingsManager.updateTheme(true, view.context)
+            activity?.recreate()
         }
         super.onViewCreated(view, savedInstanceState)
     }
