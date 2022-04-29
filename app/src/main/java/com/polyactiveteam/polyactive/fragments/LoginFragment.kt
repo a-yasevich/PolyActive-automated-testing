@@ -14,7 +14,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     lateinit var binding: FragmentLoginBinding
 
-    @Override
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,12 +24,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         return binding.root
     }
 
-    @Override
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSignInLogin.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_main)
+            findNavController().navigate(R.id.from_login_to_feed)
         }
         binding.buttonToRegistration.setOnClickListener {
             findNavController().navigate(R.id.from_login_to_registration)
