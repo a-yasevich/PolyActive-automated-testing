@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.polyactiveteam.polyactive.services.LanguageManager
+import com.polyactiveteam.polyactive.services.SettingsManager
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -47,6 +47,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(LanguageManager.updateWithPersisted(base ?: return, "ru"))
+        super.attachBaseContext(SettingsManager.updateWithPersisted(base ?: return, "ru", false))
     }
 }
