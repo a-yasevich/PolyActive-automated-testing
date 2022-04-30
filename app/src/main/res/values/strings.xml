@@ -2,7 +2,7 @@
     <string name="app_name">PolyActive</string>
     <string name="menu_title_profile">Профиль</string>
     <string name="menu_title_feed">Новости</string>
-    <string name="menu_title_settings">Настройка</string>
+    <string name="menu_title_settings">Настройки</string>
     <string name="tab_item_group_1">Группа 1</string>
     <string name="tab_item_group_2">Группа 2</string>
     <string name="tab_item_group_3">Группа 3</string>
