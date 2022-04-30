@@ -1,24 +1,15 @@
 package com.polyactiveteam.polyactive
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.polyactiveteam.polyactive.fragments.FeedFragment
-import com.polyactiveteam.polyactive.fragments.ProfileFragment
-import com.polyactiveteam.polyactive.fragments.SettingsFragment
+import com.polyactiveteam.polyactive.services.SettingsManager
 
 class MainActivity : AppCompatActivity() {
-
-    private val fragmentManager: FragmentManager = supportFragmentManager
-    private val feedFragment: Fragment = FeedFragment()
-    private val settingFragment: Fragment = SettingsFragment()
-    private val profileFragment = ProfileFragment()
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +17,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.action_profile -> {
+                    navController.navigate(R.id.profile_fragment)
+                }
+                R.id.action_feed -> {
+                    navController.navigate(R.id.feed_fragment)
+                }
+                R.id.action_settings -> {
+                    navController.navigate(R.id.settings_fragment)
+                }
+            }
+            true
+        }
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+
         navController = navHostFragment.navController
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -37,26 +44,9 @@ class MainActivity : AppCompatActivity() {
                 else -> bottomNavigation.visibility = View.VISIBLE
             }
         }
-
-        bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.action_profile -> {
-                    //Посмотрите в navigation_graph - комментарий для перехода в fragment_login
-                    //Переместить строку из fragment_settings в fragment_profile
-                    setFragment(profileFragment)
-                }
-                R.id.action_feed -> {
-                    setFragment(feedFragment)
-                }
-                R.id.action_settings -> {
-                    setFragment(settingFragment)
-                }
-            }
-            true
-        }
     }
 
-    private fun setFragment(fragment: Fragment) {
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(SettingsManager.updateWithPersisted(base ?: return, "ru", false))
     }
 }

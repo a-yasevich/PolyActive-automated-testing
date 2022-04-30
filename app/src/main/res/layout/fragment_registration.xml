@@ -1,78 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_registration"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="30dp">
-
+    android:layout_gravity="center">
 
     <ImageView
+        android:id="@+id/ic_polytech"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/ic_polyactive_logo"
-        android:contentDescription="@string/logo_name" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logo_name"
+        android:layout_marginTop="12sp"
+        android:text="@string/app_name"
+        android:textColor="@color/dark_grey"
         android:textSize="34sp"
         android:textStyle="bold"
-        android:textColor="@color/dark_grey"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_polytech" />
 
     <EditText
         android:id="@+id/editLoginRegistration"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="12dp"
         android:autofillHints="username"
         android:background="@drawable/ic_edit_text_login_style"
         android:hint="@string/editText_login"
         android:inputType="text"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp" />
+        android:padding="12dp"
+        android:textSize="@dimen/standard_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_name" />
 
     <EditText
         android:id="@+id/editPasswordRegistration"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_margin="12dp"
         android:autofillHints="password"
         android:background="@drawable/ic_edit_text_login_style"
         android:hint="@string/editText_password"
         android:inputType="textPassword"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp" />
+        android:padding="12dp"
+        android:textSize="@dimen/standard_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editLoginRegistration" />
 
     <EditText
         android:id="@+id/editRepeatPasswordRegistration"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_margin="12dp"
         android:autofillHints="password"
         android:background="@drawable/ic_edit_text_login_style"
-        android:hint="@string/editText_repeat_password"
+        android:hint="@string/editText_password"
         android:inputType="textPassword"
-        android:paddingStart="15dp"
-        android:paddingEnd="15dp" />
+        android:padding="12dp"
+        android:textSize="@dimen/standard_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editPasswordRegistration" />
 
     <Button
-        android:id="@+id/buttonSignInRegistration"
+        android:id="@+id/buttonSignInLogin"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_gravity="center"
         android:layout_marginTop="30dp"
         android:background="@drawable/ic_button_rounded_login_style"
+        android:padding="12dp"
         android:text="@string/sign_in"
-        android:textSize="23sp" />
+        android:textSize="@dimen/standard_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editRepeatPasswordRegistration" />
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

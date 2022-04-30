@@ -8,11 +8,13 @@
         android:id="@+id/fragment_login"
         android:name="com.polyactiveteam.polyactive.fragments.LoginFragment">
         <action
-            android:id="@+id/from_login_to_main"
-            app:destination="@id/profile_fragment"
+            android:id="@+id/from_login_to_feed"
+            app:destination="@id/feed_fragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
-
+        <action
+            android:id="@+id/from_login_to_profile"
+            app:destination="@id/profile_fragment" />
         <action
             android:id="@+id/from_login_to_registration"
             app:destination="@id/fragment_registration" />
@@ -27,27 +29,46 @@
             app:destination="@id/fragment_login"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
-
     </fragment>
 
-
-    <!-- Изменить на фрагмент профиля -->
     <fragment
         android:id="@+id/profile_fragment"
         android:name="com.polyactiveteam.polyactive.fragments.ProfileFragment">
+        <action
+            android:id="@+id/action_profile_fragment_to_fragment_settings"
+            app:destination="@id/settings_fragment" />
+        <action
+            android:id="@+id/action_profile_fragment_to_feed_fragment"
+            app:destination="@id/feed_fragment" />
+        <action
+            android:id="@+id/from_profile_to_login"
+            app:destination="@id/fragment_login"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
 
-
-    <!--
-        Для выхода в логин из фргамента профиля
-
-       android:id="@+id/фаргемент профиля"
-       android:name="com.polyactiveteam.polyactive.fragments.фрагмент профиля">
+    <fragment
+        android:id="@+id/feed_fragment"
+        android:name="com.polyactiveteam.polyactive.fragments.FeedFragment">
 
         <action
-                android:id="@+id/from_profile_to_login"
-                app:destination="@id/fragment_login"
-                app:popUpTo="@id/nav_graph"
-                app:popUpToInclusive="true"/>
-         -->
+            android:id="@+id/action_feed_fragment_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_feed_fragment_to_settings_fragment"
+            app:destination="@id/settings_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.polyactiveteam.polyactive.fragments.SettingsFragment">
+
+        <action
+            android:id="@+id/action_fragment_settings_to_profile_fragment"
+            app:destination="@id/profile_fragment" />
+        <action
+            android:id="@+id/action_settings_fragment_to_feed_fragment"
+            app:destination="@id/feed_fragment" />
+    </fragment>
+
 </navigation>

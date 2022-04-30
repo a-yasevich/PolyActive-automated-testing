@@ -8,18 +8,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.polyactiveteam.polyactive.R
-import com.polyactiveteam.polyactive.databinding.ProfileFragmentBinding
+import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import java.net.URL
 import java.util.*
 
-
 class ProfileFragment : Fragment() {
-    private lateinit var binding: ProfileFragmentBinding
+
+    private lateinit var binding: FragmentProfileBinding
 
     companion object { //singleton
         lateinit var user: User
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,41 +32,43 @@ class ProfileFragment : Fragment() {
         val googleLastName: String? = arguments?.getString("googleLastName")
         val googleProfilePicURL: String? = arguments?.getString("googleProfilePicURL")
         user = User(googleFirstName, googleLastName)
-        binding = ProfileFragmentBinding.inflate(inflater)
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         with(binding) {
-            mainName.text = user.toString()
-            firstName.text = googleFirstName
-            lastName.text = googleLastName
+            userName.text = user.toString()
             if (googleProfilePicURL != null) {
                 Thread {
                     val url = URL(googleProfilePicURL)
-                    mainImage.findViewById<ImageView>(R.id.avatar_image).setImageBitmap(
-                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    )
+                    val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                    requireActivity().runOnUiThread {
+                        icProfile.findViewById<ImageView>(R.id.avatar_image).setImageBitmap(bitmap)
+                    }
                 }.start()
             }
-            changeButton.setOnClickListener {
-                user.name = firstName.text.toString()
-                user.lastName = lastName.text.toString()
-                mainName.text = user.toString()
-            }
-            prof.setOnClickListener {
+            profButton.setOnClickListener {
                 setColor(it, Groups.PROF)
             }
-            adapters.setOnClickListener {
+            adaptersButton.setOnClickListener {
                 setColor(it, Groups.ADAPTERS)
             }
-            brigades.setOnClickListener {
+            brigadesButton.setOnClickListener {
                 setColor(it, Groups.BRIGADES)
             }
         }
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonExit.setOnClickListener {
+            findNavController().navigate(R.id.from_profile_to_login)
+        }
+    }
+
     private fun setColor(it: View, group: Groups) {
         when (user.processGroup(group)) {
             Answer.REMOVE -> {
-                it.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.titan_white))
+                it.setBackgroundResource(R.drawable.ic_group_button_deactive)
             }
             else -> it.setBackgroundColor(
                 ContextCompat.getColor(
@@ -101,4 +105,5 @@ class ProfileFragment : Fragment() {
     enum class Answer {
         ADD, REMOVE
     }
+
 }

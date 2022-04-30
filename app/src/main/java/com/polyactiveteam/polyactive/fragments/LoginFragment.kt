@@ -18,17 +18,16 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentLoginBinding
-import com.polyactiveteam.polyactive.databinding.ProfileFragmentBinding
+import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 
 
 class LoginFragment : Fragment(R.layout.fragment_login) {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var profileBinding: ProfileFragmentBinding
+    private lateinit var profileBinding: FragmentProfileBinding
     private lateinit var gso: GoogleSignInOptions
     private lateinit var gsc: GoogleSignInClient
 
-    @Override
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,7 +35,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     ): View {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         binding = FragmentLoginBinding.inflate(inflater, container, false)
-        profileBinding = ProfileFragmentBinding.inflate(inflater)
+        profileBinding = FragmentProfileBinding.inflate(inflater)
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
@@ -44,11 +43,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         return binding.root
     }
 
-    @Override
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonSignInLogin.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_main)
+            findNavController().navigate(R.id.from_login_to_feed)
         }
         binding.buttonToRegistration.setOnClickListener {
             findNavController().navigate(R.id.from_login_to_registration)
@@ -59,7 +57,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    @Override
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
@@ -81,7 +78,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     if (googleProfilePicURL != null) {
                         bundle.putString("googleProfilePicURL", googleProfilePicURL.toString())
                     }
-                    findNavController().navigate(R.id.from_login_to_main, bundle)
+                    findNavController().navigate(R.id.from_login_to_profile, bundle)
                 }
             } catch (e: ApiException) {
                 Toast.makeText(
