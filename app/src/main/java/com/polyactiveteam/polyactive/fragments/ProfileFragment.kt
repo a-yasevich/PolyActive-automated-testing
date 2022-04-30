@@ -1,5 +1,6 @@
 package com.polyactiveteam.polyactive.fragments
 
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,30 +20,37 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
     companion object { //singleton
-        lateinit var user: User
+        val user: User = User()
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentProfileBinding.inflate(inflater, container, false)
         val googleFirstName: String? = arguments?.getString("googleFirstName")
         val googleLastName: String? = arguments?.getString("googleLastName")
         val googleProfilePicURL: String? = arguments?.getString("googleProfilePicURL")
-        user = User(googleFirstName, googleLastName)
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        if (googleFirstName != null ) {
+            user.firstName = googleFirstName
+        }
+        if (googleLastName != null ) {
+            user.lastName = googleLastName
+        }
+        if (googleProfilePicURL != null) {
+            Thread {
+                val url = URL(googleProfilePicURL)
+                user.googleProfilePicBitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                requireActivity().runOnUiThread {
+                    binding.icProfile.findViewById<ImageView>(R.id.avatar_image).setImageBitmap(user.googleProfilePicBitmap)
+                }
+            }.start()
+        }
         with(binding) {
             userName.text = user.toString()
-            if (googleProfilePicURL != null) {
-                Thread {
-                    val url = URL(googleProfilePicURL)
-                    val bitmap = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    requireActivity().runOnUiThread {
-                        icProfile.findViewById<ImageView>(R.id.avatar_image).setImageBitmap(bitmap)
-                    }
-                }.start()
+            if (user.googleProfilePicBitmap != null) {
+                icProfile.findViewById<ImageView>(R.id.avatar_image).setImageBitmap(user.googleProfilePicBitmap)
             }
             profButton.setOnClickListener {
                 setColor(it, Groups.PROF)
@@ -79,12 +87,15 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    class User(var name: String?, var lastName: String?) {
+    class User {
+        var firstName: String = "First Name"
+        var lastName: String= "Last Name"
+        var googleProfilePicBitmap: Bitmap? = null
 
         private val groups: EnumSet<Groups> = EnumSet.noneOf(Groups::class.java)
 
         override fun toString(): String {
-            return "$name $lastName"
+            return "$firstName $lastName"
         }
 
         fun processGroup(group: Groups): Answer {
