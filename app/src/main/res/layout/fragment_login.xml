@@ -11,18 +11,18 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
-        android:src="@drawable/ic_polyactive_logo"
-        android:contentDescription="@string/logo_name" />
+        android:contentDescription="@string/logo_name"
+        android:src="@drawable/ic_polyactive_logo" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/logo_name"
-        android:textSize="34sp"
-        android:textStyle="bold"
-        android:textColor="@color/dark_grey"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:text="@string/logo_name"
+        android:textColor="@color/dark_grey"
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/editUsernameLogin"
@@ -70,6 +70,15 @@
         android:text="@string/register"
         android:textColor="@color/silver"
         android:textSize="13sp" />
+
+    <ImageView
+        android:id="@+id/google_sign_in_button"
+        android:layout_height="48dp"
+        android:layout_width="48dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+        android:src="@drawable/common_google_signin_btn_icon_light"
+        android:contentDescription="Google sign in" />
 
 
 </LinearLayout>

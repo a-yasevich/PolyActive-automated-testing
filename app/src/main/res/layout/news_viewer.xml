@@ -5,6 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/news_viewer_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/forest_green"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="?attr/homeAsUpIndicator" />
 
     <ImageView
         android:id="@+id/news_viewer__news_image"
@@ -14,7 +21,7 @@
         android:background="@drawable/news1"
         android:contentDescription="news_image"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/news_viewer_toolbar" />
 
     <TextView
         android:id="@+id/news_viewer__header"
@@ -27,7 +34,6 @@
         app:layout_constraintBottom_toBottomOf="@id/news_viewer__news_image"
         app:layout_constraintTop_toBottomOf="@+id/news_viewer__news_image"
         tools:text="Заголовок новости" />
-
 
     <TextView
         android:id="@+id/news_viewer__description"

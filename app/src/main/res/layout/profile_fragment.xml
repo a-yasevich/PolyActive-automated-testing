@@ -28,7 +28,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-
                 <androidx.cardview.widget.CardView
                     android:id="@+id/mainImage"
                     android:layout_width="80dp"
@@ -41,6 +40,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
+                        android:id="@+id/avatar_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:src="@drawable/ic_person"
@@ -58,8 +58,8 @@
                     app:layout_constraintStart_toEndOf="@id/mainImage"
                     app:layout_constraintTop_toTopOf="@id/mainImage" />
 
-                <EditText
-                    android:id="@+id/setName"
+                <TextView
+                    android:id="@+id/first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -72,8 +72,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/mainImage" />
 
-                <EditText
-                    android:id="@+id/setLastName"
+                <TextView
+                    android:id="@+id/last_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -84,7 +84,7 @@
                     android:paddingEnd="0dp"
                     android:textSize="30sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/setName" />
+                    app:layout_constraintTop_toBottomOf="@id/first_name" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/changeButton"
@@ -99,7 +99,7 @@
                     android:textSize="30sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/setLastName" />
+                    app:layout_constraintTop_toBottomOf="@id/last_name" />
 
                 <ScrollView
                     android:layout_width="match_parent"
