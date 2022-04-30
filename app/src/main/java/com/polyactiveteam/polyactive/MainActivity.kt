@@ -10,12 +10,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.services.SettingsManager
 
 class MainActivity : AppCompatActivity() {
+
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
+
+        navController = navHostFragment.navController
 
         bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -32,11 +38,6 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.fragment_container) as NavHostFragment
-
-        navController = navHostFragment.navController
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.fragment_login -> bottomNavigation.visibility = View.GONE
@@ -47,6 +48,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun attachBaseContext(base: Context?) {
-        super.attachBaseContext(SettingsManager.updateWithPersisted(base ?: return, "ru", false))
+        super.attachBaseContext(
+            SettingsManager.updateWithPersisted(
+                base ?: return,
+                "ru",
+                false
+            )
+        )
     }
 }
