@@ -3,7 +3,7 @@
     <color name="forest_green">#1B8C37</color>
     <color name="whisper">#F3F3F9</color>
     <color name="titan_white">#FBFBFF</color>
-    <color name="silver">#C4C4C4</color> <!-- Должен иметь 20% прозрачность -->
+    <color name="silver">#C4C4C4</color>
     <color name="light_silver">#CDDCDCDC</color>
     <color name="lunar_green">#39453B</color>
     <color name="light_grey">#ececec</color>
