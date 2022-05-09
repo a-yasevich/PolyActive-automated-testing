@@ -40,6 +40,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             .requestEmail()
             .build()
         gsc = GoogleSignIn.getClient(requireActivity(), gso)
+
+        val account : GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
+        if (account != null) {
+            findNavController().navigate(R.id.from_login_to_profile)
+        }
         return binding.root
     }
 
@@ -52,9 +57,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             findNavController().navigate(R.id.from_login_to_registration)
         }
         binding.googleSignInButton.setOnClickListener {
-            val signIntent: Intent = gsc.signInIntent
-            startActivityForResult(signIntent, RC_SIGN_IN)
+            signInWithGoogle()
         }
+    }
+
+    private fun signInWithGoogle() {
+        val signIntent: Intent = gsc.signInIntent
+        startActivityForResult(signIntent, RC_SIGN_IN)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

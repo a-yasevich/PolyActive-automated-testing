@@ -18,6 +18,7 @@
     <string name="editText_login">Логин</string>
     <string name="editText_password">Пароль</string>
     <string name="editText_repeat_password">Повторите пароль</string>
+    <string name="sign_in_with_google">Войти с помощью Google</string>
     <string name="setNewLastName">Введите новую фамилию</string>
     <string name="defaultName">Steve Rogers</string>
     <string name="setNewName">Введите новое имя</string>
@@ -29,5 +30,4 @@
     <string name="news_image">news_image</string>
     <string name="like">like</string>
     <string name="exit">Выйти</string>
-    <string name="google_sign_in_description">Google sign in</string>
 </resources>
