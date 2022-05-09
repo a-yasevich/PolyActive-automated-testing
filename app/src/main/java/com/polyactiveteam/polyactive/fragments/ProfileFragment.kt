@@ -16,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import java.net.URL
@@ -29,6 +30,11 @@ class ProfileFragment : Fragment() {
 
     companion object { //singleton
         val user: User = User()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_profile)
     }
 
     override fun onCreateView(
@@ -98,7 +104,6 @@ class ProfileFragment : Fragment() {
 
     private fun signOut() {
         gsc.signOut()
-
         findNavController().navigate(R.id.from_profile_to_login)
     }
 
