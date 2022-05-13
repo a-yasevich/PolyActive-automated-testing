@@ -30,20 +30,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_polytech" />
 
-
     <TextView
         android:id="@+id/google_sign_in_button"
-        android:layout_height="48dp"
         android:layout_width="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
+        android:layout_margin="12dp"
         android:contentDescription="@string/sign_in_with_google"
-        app:drawableLeftCompat="@drawable/common_google_signin_btn_icon_light"
+        android:gravity="center"
         android:text="@string/sign_in_with_google"
         android:textColor="@color/dark_grey"
         android:textSize="14sp"
-        android:gravity="center"
         android:textStyle="bold"
+        app:drawableLeftCompat="@drawable/common_google_signin_btn_icon_light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_name" />
