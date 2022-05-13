@@ -7,29 +7,12 @@
     <fragment
         android:id="@+id/fragment_login"
         android:name="com.polyactiveteam.polyactive.fragments.LoginFragment">
+
         <action
             android:id="@+id/from_login_to_feed"
-            app:destination="@id/profile_fragment"
+            app:destination="@id/feed_fragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-
-        <action
-            android:id="@+id/from_login_to_profile"
-            app:destination="@id/profile_fragment" />
-        <action
-            android:id="@+id/from_login_to_registration"
-            app:destination="@id/fragment_registration" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/fragment_registration"
-        android:name="com.polyactiveteam.polyactive.fragments.RegistrationFragment">
-
-        <action
-            android:id="@+id/from_registration_to_login"
-            app:destination="@id/fragment_login"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment

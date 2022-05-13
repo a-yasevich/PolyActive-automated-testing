@@ -43,20 +43,14 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         val account : GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
         if (account != null) {
-            findNavController().navigate(R.id.from_login_to_profile)
+            findNavController().navigate(R.id.from_login_to_feed)
         }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonSignInLogin.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_feed)
-        }
-        binding.buttonToRegistration.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_registration)
-        }
-        binding.googleSignInButton.setOnClickListener {
+        binding.googleSignInButton?.setOnClickListener {
             signInWithGoogle()
         }
     }
@@ -87,7 +81,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                     if (googleProfilePicURL != null) {
                         bundle.putString("googleProfilePicURL", googleProfilePicURL.toString())
                     }
-                    findNavController().navigate(R.id.from_login_to_profile, bundle)
+                    findNavController().navigate(R.id.from_login_to_feed, bundle)
                 }
             } catch (e: ApiException) {
                 Toast.makeText(
