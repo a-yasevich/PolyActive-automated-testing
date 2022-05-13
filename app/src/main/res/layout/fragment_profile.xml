@@ -32,11 +32,11 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
+            android:id="@+id/avatar_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/profileImage"
             tools:src="@drawable/ic_person" />
-
     </androidx.cardview.widget.CardView>
 
     <TextView

@@ -7,12 +7,12 @@
     <fragment
         android:id="@+id/fragment_login"
         android:name="com.polyactiveteam.polyactive.fragments.LoginFragment">
+
         <action
             android:id="@+id/from_login_to_feed"
             app:destination="@id/feed_fragment"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
