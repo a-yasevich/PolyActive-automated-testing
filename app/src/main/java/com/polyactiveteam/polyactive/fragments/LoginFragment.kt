@@ -44,6 +44,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         if (account != null) {
             findNavController().navigate(R.id.from_login_to_feed)
         }
+        binding.shadowButton.setOnClickListener {
+            findNavController().navigate(R.id.from_login_to_feed)
+        }
         return binding.root
     }
 
