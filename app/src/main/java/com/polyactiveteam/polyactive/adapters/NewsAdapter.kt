@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.NewsItemBinding
 import com.polyactiveteam.polyactive.fragments.NewsViewerFragment
+import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
+class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
 
-    private val newsList = ArrayList<News>()
+    private val newsList = mutableListOf<News>()
+    private var crutchList = newsList
     lateinit var fragmentManager: FragmentManager
 
     class NewsHolder(itemView: View, private val fragmentManager: FragmentManager) :
@@ -53,11 +55,16 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-        holder.bind(newsList[position])
+        holder.bind(crutchList[position])
     }
 
     override fun getItemCount(): Int {
-        return newsList.size
+        return crutchList.size
+    }
+
+    fun changeType(group: Group) {
+        crutchList = newsList.filter { group == Group.ALL || it.groupType == group }
+            .toMutableList()
     }
 
     fun addAllItems(news: ArrayList<News>) {
