@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
+import com.polyactiveteam.polyactive.model.VkGroups
 import java.util.*
 
 class ProfileFragment : Fragment() {
@@ -33,13 +34,13 @@ class ProfileFragment : Fragment() {
         with(binding) {
             userName.text = user.toString()
             profButton.setOnClickListener {
-                setColor(it, Groups.PROF)
+                setColor(it, VkGroups.PROF)
             }
             adaptersButton.setOnClickListener {
-                setColor(it, Groups.ADAPTERS)
+                setColor(it, VkGroups.ADAPTERS)
             }
             brigadesButton.setOnClickListener {
-                setColor(it, Groups.BRIGADES)
+                setColor(it, VkGroups.STUD_BRIGADES)
             }
         }
         return binding.root
@@ -53,7 +54,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun setColor(it: View, group: Groups) {
+    private fun setColor(it: View, group: VkGroups) {
         when (user.processGroup(group)) {
             Answer.REMOVE -> {
                 it.setBackgroundResource(R.drawable.ic_group_button_deactive)
@@ -63,13 +64,13 @@ class ProfileFragment : Fragment() {
     }
 
     class User(var name: String, var lastName: String) {
-        private val groups: EnumSet<Groups> = EnumSet.noneOf(Groups::class.java)
+        private val groups: EnumSet<VkGroups> = EnumSet.noneOf(VkGroups::class.java)
 
         override fun toString(): String {
             return "$name $lastName"
         }
 
-        fun processGroup(group: Groups): Answer {
+        fun processGroup(group: VkGroups): Answer {
             if (group in groups) {
                 groups.remove(group)
                 return Answer.REMOVE
@@ -78,10 +79,6 @@ class ProfileFragment : Fragment() {
             return Answer.ADD
         }
 
-    }
-
-    enum class Groups {
-        ADAPTERS, BRIGADES, PROF
     }
 
     enum class Answer {

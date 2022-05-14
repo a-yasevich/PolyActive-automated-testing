@@ -1,9 +1,35 @@
 package com.polyactiveteam.polyactive.model
 
+import org.json.JSONArray
+import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
+
 data class News(
-    val imageId: Int,
+    val imageLink: String?,
     val header: String,
     val newsDescription: String,
-    val date: Long,
+    val date: String,
     val likeCounter: Int
-)
+) {
+    companion object {
+        private val formatter: SimpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
+
+        fun getNewsFromJson(json: JSONObject): News {
+            val text: String = json.getString("text")
+            val header = text.substring(0, 20) + "..."
+            val images: JSONArray = json.getJSONArray("attachments")
+            var imageLink: String? = null
+            if (images.length() != 0) {
+                imageLink = ((images.get(0) as JSONObject)
+                    .getJSONObject("photo")
+                    .getJSONArray("sizes")
+                    .get(2) as JSONObject)
+                    .getString("url")
+            }
+            val date: String = formatter.format(Date(json.getLong("date") * 1000))
+            val likes: Int = json.getJSONObject("likes").getInt("count")
+            return News(imageLink, header, text, date, likes)
+        }
+    }
+}
