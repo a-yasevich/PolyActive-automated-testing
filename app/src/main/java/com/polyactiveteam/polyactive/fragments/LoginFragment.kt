@@ -40,9 +40,11 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             .requestEmail()
             .build()
         gsc = GoogleSignIn.getClient(requireActivity(), gso)
-
-        val account : GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
+        val account: GoogleSignInAccount? = GoogleSignIn.getLastSignedInAccount(requireContext())
         if (account != null) {
+            findNavController().navigate(R.id.from_login_to_feed)
+        }
+        binding.shadowButton.setOnClickListener {
             findNavController().navigate(R.id.from_login_to_feed)
         }
         return binding.root
@@ -50,7 +52,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.googleSignInButton?.setOnClickListener {
+        binding.googleSignInButton.setOnClickListener {
             signInWithGoogle()
         }
     }
