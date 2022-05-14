@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.polyactiveteam.polyactive.R
+import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
 
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
@@ -16,6 +17,7 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             plugList.add(
                 News(
                     R.drawable.ic_news_plug,
+                    Group.BRIGADES,
                     "Новый RecycleView",
                     "Команда PolyActive добавила RecycleView к своему проекту",
                     1648329900,
@@ -25,6 +27,7 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             plugList.add(
                 News(
                     R.drawable.ic_heart_plug,
+                    Group.PROF,
                     "Крутая новость",
                     "Новость действительно крутая",
                     1648375200,
