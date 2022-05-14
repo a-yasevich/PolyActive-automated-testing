@@ -35,7 +35,11 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         }
 
         private fun setFragment(fragment: Fragment) {
-            fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
+            fragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack("feed_fragment")
+                .commit()
         }
     }
 

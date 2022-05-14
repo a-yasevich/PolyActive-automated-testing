@@ -7,12 +7,12 @@
     <fragment
         android:id="@+id/fragment_login"
         android:name="com.polyactiveteam.polyactive.fragments.LoginFragment">
+
         <action
             android:id="@+id/from_login_to_feed"
             app:destination="@id/feed_fragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
-
     </fragment>
 
     <fragment
@@ -20,10 +20,14 @@
         android:name="com.polyactiveteam.polyactive.fragments.ProfileFragment">
         <action
             android:id="@+id/action_profile_fragment_to_fragment_settings"
-            app:destination="@id/settings_fragment" />
+            app:destination="@id/settings_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_profile_fragment_to_feed_fragment"
-            app:destination="@id/feed_fragment" />
+            app:destination="@id/feed_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/from_profile_to_login"
             app:destination="@id/fragment_login"
@@ -37,10 +41,14 @@
 
         <action
             android:id="@+id/action_feed_fragment_to_profile_fragment"
-            app:destination="@id/profile_fragment" />
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_feed_fragment_to_settings_fragment"
-            app:destination="@id/settings_fragment" />
+            app:destination="@id/settings_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -49,10 +57,14 @@
 
         <action
             android:id="@+id/action_fragment_settings_to_profile_fragment"
-            app:destination="@id/profile_fragment" />
+            app:destination="@id/profile_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_settings_fragment_to_feed_fragment"
-            app:destination="@id/feed_fragment" />
+            app:destination="@id/feed_fragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

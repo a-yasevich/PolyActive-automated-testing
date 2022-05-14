@@ -14,10 +14,7 @@
     <string name="news_title">News</string>
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
-    <string name="sign_in">Sign In</string>
-    <string name="editText_login">Login</string>
-    <string name="editText_password">Password</string>
-    <string name="editText_repeat_password">Repeat password</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
     <string name="adapters_name">Adapters</string>
     <string name="students_brigades_name">Brigades</string>
     <string name="prof_name">Prof</string>
