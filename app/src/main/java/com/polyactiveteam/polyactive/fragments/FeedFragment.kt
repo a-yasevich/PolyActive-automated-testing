@@ -1,5 +1,7 @@
 package com.polyactiveteam.polyactive.fragments
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
+import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     private lateinit var binding: FragmentFeedBinding
-    lateinit var mViewModel: FeedViewModel
+    private lateinit var mViewModel: FeedViewModel
     private val adapter = NewsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,32 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             newsList.adapter = adapter
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val groupsSet: Set<Group> =
+            view.context.getSharedPreferences(ProfileFragment.GROUPS_KEY, Context.MODE_PRIVATE)
+                .getStringSet(ProfileFragment.GROUPS_KEY, emptySet())
+                ?.map { string -> Group.valueOf(string) }
+                ?.toSet() ?: emptySet()
+        val tabLayout = binding.tabLayout
+        groupsSet.forEach {
+            tabLayout.addTab(
+                with(tabLayout.newTab()) {
+                    setText(view.resources.getString(it.id))
+                    setId(it.id)
+                })
+        }
+        tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            @SuppressLint("NotifyDataSetChanged")
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                adapter.changeType(Group.groupByID(tab.id))
+                adapter.notifyDataSetChanged()
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
+            override fun onTabReselected(tab: TabLayout.Tab) {}
+        })
     }
 
     override fun onStart() {

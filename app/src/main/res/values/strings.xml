@@ -3,9 +3,10 @@
     <string name="menu_title_profile">Профиль</string>
     <string name="menu_title_feed">Новости</string>
     <string name="menu_title_settings">Настройки</string>
-    <string name="tab_item_group_1">Группа 1</string>
-    <string name="tab_item_group_2">Группа 2</string>
-    <string name="tab_item_group_3">Группа 3</string>
+    <string name="tab_item_groups_all">Все</string>
+    <string name="tab_item_adapters">Адаптеры</string>
+    <string name="tab_item_brigades">Студотряды</string>
+    <string name="tab_item_prof">Проф</string>
     <string name="language_item">Иконка выбора языка</string>
     <string name="theme_item">Иконка выбора темы</string>
     <string name="language_field">Язык</string>

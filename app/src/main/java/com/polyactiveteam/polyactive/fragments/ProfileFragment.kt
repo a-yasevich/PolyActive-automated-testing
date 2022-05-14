@@ -1,5 +1,7 @@
 package com.polyactiveteam.polyactive.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -9,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,17 +20,24 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
+import com.polyactiveteam.polyactive.model.Group
 import java.net.URL
 import java.util.*
+import kotlin.String
+import kotlin.with
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private lateinit var gso: GoogleSignInOptions
     private lateinit var gsc: GoogleSignInClient
+    private lateinit var preferences: SharedPreferences
 
-    companion object { //singleton
-        val user: User = User()
+    //singleton
+    private val user: User = User()
+
+    companion object {
+        val GROUPS_KEY = "Groups";
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,6 +84,7 @@ class ProfileFragment : Fragment() {
                 }.start()
             }
         }
+
         with(binding) {
             userName.text = user.toString()
             if (user.googleProfilePicBitmap != null) {
@@ -83,13 +92,13 @@ class ProfileFragment : Fragment() {
                     .setImageBitmap(user.googleProfilePicBitmap)
             }
             profButton.setOnClickListener {
-                setColor(it, Groups.PROF)
+                switchGroupButtonState(it, Group.PROF)
             }
             adaptersButton.setOnClickListener {
-                setColor(it, Groups.ADAPTERS)
+                switchGroupButtonState(it, Group.ADAPTERS)
             }
             brigadesButton.setOnClickListener {
-                setColor(it, Groups.BRIGADES)
+                switchGroupButtonState(it, Group.BRIGADES)
             }
         }
         return binding.root
@@ -100,55 +109,57 @@ class ProfileFragment : Fragment() {
         binding.buttonExit.setOnClickListener {
             signOut()
         }
+        preferences = view.context.getSharedPreferences(GROUPS_KEY, Context.MODE_PRIVATE)
+        preferences.getStringSet(GROUPS_KEY, emptySet())?.map { s: String -> Group.valueOf(s) }
+            ?.forEach {
+                user.groups.add(it)
+            }
+        with(binding) {
+            resolveGroupButtonState(profButton, Group.PROF)
+            resolveGroupButtonState(adaptersButton, Group.ADAPTERS)
+            resolveGroupButtonState(brigadesButton, Group.BRIGADES)
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        preferences.edit()
+            .putStringSet(GROUPS_KEY, user.groups.map { group -> group.toString() }.toSet()).apply()
     }
 
     private fun signOut() {
         gsc.signOut()
         findNavController().navigate(R.id.from_profile_to_login)
+
     }
 
-    private fun setColor(it: View, group: Groups) {
-        when (user.processGroup(group)) {
-            Answer.REMOVE -> {
-                it.setBackgroundResource(R.drawable.ic_group_button_deactive)
-            }
-            else -> it.setBackgroundColor(
-                ContextCompat.getColor(
-                    requireContext(),
-                    R.color.forest_green
-                )
-            )
+    private fun resolveGroupButtonState(button: View, group: Group) {
+        if (group in user.groups) {
+            button.setBackgroundResource(R.drawable.ic_group_button_active)
         }
     }
 
-    class User {
+    private fun switchGroupButtonState(button: View, group: Group) {
+        val userGroups = user.groups
+        if (group in userGroups) {
+            userGroups.remove(group)
+            button.setBackgroundResource(R.drawable.ic_group_button_deactive)
+        } else {
+            userGroups.add(group)
+            button.setBackgroundResource(R.drawable.ic_group_button_active)
+        }
+    }
+
+    private class User {
         var firstName: String = "First Name"
         var lastName: String = "Last Name"
         var googleProfilePicBitmap: Bitmap? = null
 
-        private val groups: EnumSet<Groups> = EnumSet.noneOf(Groups::class.java)
+        val groups: EnumSet<Group> = EnumSet.noneOf(Group::class.java)
 
         override fun toString(): String {
             return "$firstName $lastName"
         }
-
-        fun processGroup(group: Groups): Answer {
-            if (group in groups) {
-                groups.remove(group)
-                return Answer.REMOVE
-            }
-            groups.add(group)
-            return Answer.ADD
-        }
-
-    }
-
-    enum class Groups {
-        ADAPTERS, BRIGADES, PROF
-    }
-
-    enum class Answer {
-        ADD, REMOVE
     }
 
 }
