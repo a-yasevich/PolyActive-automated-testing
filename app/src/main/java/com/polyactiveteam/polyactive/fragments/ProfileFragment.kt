@@ -1,5 +1,8 @@
 package com.polyactiveteam.polyactive.fragments
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -118,7 +121,7 @@ class ProfileFragment : Fragment() {
         var lastName: String = "Last Name"
         var googleProfilePicBitmap: Bitmap? = null
 
-        private val groups: EnumSet<Groups> = EnumSet.noneOf(Groups::class.java)
+        private val groups: EnumSet<VkGroups> = EnumSet.noneOf(VkGroups::class.java)
 
         override fun toString(): String {
             return "$firstName $lastName"
