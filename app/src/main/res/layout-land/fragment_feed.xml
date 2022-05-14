@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tabGravity="fill"
         app:tabMaxWidth="0dp"
-        app:tabMode="fixed">
+        app:tabMode="scrollable">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="0dp"
