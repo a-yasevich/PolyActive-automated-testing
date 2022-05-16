@@ -25,9 +25,11 @@ class NewsViewerFragment(private val news: News) : Fragment() {
         bottomNavigation.visibility = View.GONE
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         with(binding) {
-            Glide.with(this@NewsViewerFragment)
-                .load(news.imageLink)
-                .into(newsViewerNewsImage)
+            if (news.imageLink != null) {
+                Glide.with(this@NewsViewerFragment)
+                    .load(news.imageLink)
+                    .into(newsViewerNewsImage)
+            }
             newsViewerHeader.text = news.header
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()

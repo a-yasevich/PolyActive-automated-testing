@@ -23,9 +23,12 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         private val binding = NewsItemBinding.bind(itemView)
 
         fun bind(news: News) = with(binding) {
-            Glide.with(itemView)
-                .load(news.imageLink)
-                .into(newsCardNewsImage)
+            if (news.imageLink != null) {
+                Glide.with(itemView)
+                    .load(news.imageLink)
+                    .into(newsCardNewsImage)
+
+            }
             newsCardNewsHeader.text = news.header
             newsCardSmallDescription.text = news.newsDescription
             newsCardNewsDate.text = news.date
