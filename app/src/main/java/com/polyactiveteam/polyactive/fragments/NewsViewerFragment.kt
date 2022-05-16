@@ -13,7 +13,7 @@ import com.polyactiveteam.polyactive.model.News
 class NewsViewerFragment(private val news: News) : Fragment() {
 
     private lateinit var binding: FragmentNewsViewerBinding
-    private lateinit var bottomNavigation : BottomNavigationView
+    private lateinit var bottomNavigation: BottomNavigationView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class NewsViewerFragment(private val news: News) : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         bottomNavigation = requireActivity().findViewById(R.id.bottom_navigation)
-        bottomNavigation.visibility  = View.GONE
+        bottomNavigation.visibility = View.GONE
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         with(binding) {
             newsViewerNewsImage.setBackgroundResource(news.imageId)

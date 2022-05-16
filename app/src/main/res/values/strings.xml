@@ -2,7 +2,7 @@
     <string name="app_name">PolyActive</string>
     <string name="menu_title_profile">Профиль</string>
     <string name="menu_title_feed">Новости</string>
-    <string name="menu_title_settings">Настройка</string>
+    <string name="menu_title_settings">Настройки</string>
     <string name="tab_item_group_1">Группа 1</string>
     <string name="tab_item_group_2">Группа 2</string>
     <string name="tab_item_group_3">Группа 3</string>
@@ -13,21 +13,10 @@
     <string name="news_title">Новости</string>
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
-    <string name="sign_in">Войти</string>
-    <string name="register">Регистрация</string>
-    <string name="editText_login">Логин</string>
-    <string name="editText_password">Пароль</string>
-    <string name="editText_repeat_password">Повторите пароль</string>
-    <string name="setNewLastName">Введите новую фамилию</string>
-    <string name="defaultName">Steve Rogers</string>
-    <string name="setNewName">Введите новое имя</string>
-    <string name="changeButton">Изменить</string>
+    <string name="sign_in_with_google">Войти с помощью Google</string>
     <string name="adapters_name">Адаптеры</string>
     <string name="students_brigades_name">Студотряды</string>
     <string name="prof_name">Проф</string>
     <string name="profileImage">Фото профиля</string>
-    <string name="news_image">news_image</string>
-    <string name="like">like</string>
     <string name="exit">Выйти</string>
-    <string name="google_sign_in_description">Google sign in</string>
 </resources>

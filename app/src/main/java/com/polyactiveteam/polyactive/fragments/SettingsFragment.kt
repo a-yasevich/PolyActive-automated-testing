@@ -4,21 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.polyactiveteam.polyactive.MainActivity
+import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentSettingsBinding
 import com.polyactiveteam.polyactive.services.SettingsManager
 
 class SettingsFragment : Fragment() {
+
     lateinit var binding: FragmentSettingsBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_settings)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //Переместить строчку ниже в fragment_profile
-        //чтобы при переходе с navigation_graph ActionBar был виден
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
         // Inflate the layout for this fragment
