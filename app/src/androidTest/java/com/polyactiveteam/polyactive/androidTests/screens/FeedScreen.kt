@@ -15,18 +15,26 @@ import com.polyactiveteam.polyactive.model.News
 import org.hamcrest.Matcher
 
 
-class FeedScreen: NavigableScreen() {
-    private val feedFragment = R.id.feed_fragment
-    private val newsList = R.id.news_list
+class FeedScreen : NavigableScreen() {
+    companion object {
+        private const val NEWS_LIST = R.id.news_list
+    }
 
     fun checkEqualityWithNewsOnPosition(news: News, position: Int): FeedScreen {
-        onView(withId(newsList))
-            .check(matches(matchesAtPosition(position, hasDescendant(withText(news.newsDescription)))))
+        onView(withId(NEWS_LIST))
+            .check(
+                matches(
+                    matchesAtPosition(
+                        position,
+                        hasDescendant(withText(news.newsDescription))
+                    )
+                )
+            )
         return this
     }
 
-    fun pressNewsAtPosition(position: Int): NewsViewerScreen {
-        onView(withId(newsList))
+    fun clickToViewNewsAtPosition(position: Int): NewsViewerScreen {
+        onView(withId(NEWS_LIST))
             .perform(actionAtPosition(position, click()))
         return NewsViewerScreen()
     }

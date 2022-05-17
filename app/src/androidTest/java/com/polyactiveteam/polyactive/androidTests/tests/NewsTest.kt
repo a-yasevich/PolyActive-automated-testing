@@ -1,4 +1,4 @@
-package com.polyactiveteam.polyactive.androidTests.tests.login
+package com.polyactiveteam.polyactive.androidTests.tests
 
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.androidTests.screens.LoginScreen
@@ -20,7 +20,7 @@ class NewsTest : BaseTest() {
     fun viewTestNews() {
         LoginScreen().logIn()
             .checkEqualityWithNewsOnPosition(testNews, 0)
-            .pressNewsAtPosition(0)
+            .clickToViewNewsAtPosition(0)
             .checkEquality(testNews)
     }
 }

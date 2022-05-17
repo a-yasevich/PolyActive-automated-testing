@@ -1,34 +1,38 @@
 package com.polyactiveteam.polyactive.androidTests.screens
 
-import androidx.test.espresso.Espresso.*
-import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.polyactiveteam.polyactive.R
 
 open class NavigableScreen {
-    private val feedBottomNavItemId = R.id.action_feed
-    private val settingsBottomNavItemId = R.id.action_settings
-    private val profileBottomNavItemId = R.id.action_profile
+    companion object {
+        private const val FEED_BOTTOM_NAV_ITEM = R.id.action_feed
+        private const val SETTINGS_BOTTOM_NAV_ITEM = R.id.action_settings
+        private const val PROFILE_BOTTOM_NAV_ITEM = R.id.action_profile
+    }
 
     fun goToSettingsScreen(): SettingsScreen {
-        onView(ViewMatchers.withId(settingsBottomNavItemId))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-            .perform()
+        onView(withId(SETTINGS_BOTTOM_NAV_ITEM))
+            .check(ViewAssertions.matches(isDisplayed()))
+            .perform(click())
         return SettingsScreen()
     }
 
     fun goToProfileScreen(): ProfileScreen {
-        onView(ViewMatchers.withId(profileBottomNavItemId))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-            .perform(ViewActions.click())
+        onView(withId(PROFILE_BOTTOM_NAV_ITEM))
+            .check(ViewAssertions.matches(isDisplayed()))
+            .perform(click())
         return ProfileScreen()
     }
 
     fun goToFeedScreen(): FeedScreen {
-        onView(ViewMatchers.withId(feedBottomNavItemId))
-            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-            .perform(ViewActions.click())
+        onView(withId(FEED_BOTTOM_NAV_ITEM))
+            .check(ViewAssertions.matches(isDisplayed()))
+            .perform(click())
         return FeedScreen()
     }
+
 }

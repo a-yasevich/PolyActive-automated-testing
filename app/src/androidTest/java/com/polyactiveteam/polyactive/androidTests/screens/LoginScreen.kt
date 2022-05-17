@@ -8,13 +8,14 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.polyactiveteam.polyactive.R
 
 class LoginScreen {
-
-    private val googleSignInButton = R.id.shadow_button
-    private val fragmentFeed = R.id.feed_fragment
+    companion object{
+        private const val SIGN_IN_BUTTON = R.id.shadow_button
+        private const val FRAGMENT_FEED = R.id.feed_fragment
+    }
 
     fun logIn(): FeedScreen {
-        onView(withId(googleSignInButton)).check(matches(isDisplayed())).perform(click())
-        onView(withId(fragmentFeed)).check(matches(isDisplayed()))
+        onView(withId(SIGN_IN_BUTTON)).check(matches(isDisplayed())).perform(click())
+        onView(withId(FRAGMENT_FEED)).check(matches(isDisplayed()))
         return FeedScreen()
     }
 }

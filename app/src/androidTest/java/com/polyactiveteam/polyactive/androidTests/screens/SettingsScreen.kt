@@ -1,7 +1,6 @@
 package com.polyactiveteam.polyactive.androidTests.screens
 
 import android.content.res.Configuration
-import android.content.res.Resources
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -12,24 +11,23 @@ import java.util.*
 
 class SettingsScreen : NavigableScreen() {
     companion object {
-        private const val englishLanguageButton = R.id.language_iv2
-        private const val languageTextField = R.id.language_tv
-        private const val themeTextField = R.id.theme_tv
-        private const val profileBottomNavItemId = R.id.action_profile
+        private const val ENGLISH_LAN_BUTTON = R.id.language_iv2
+        private const val LANGUAGE_TEXT_FIELD = R.id.language_tv
+        private const val THEME_TEXT_FIELD = R.id.theme_tv
     }
 
     fun switchToEnglish(): SettingsScreen {
-        onView(withId(englishLanguageButton))
+        onView(withId(ENGLISH_LAN_BUTTON))
             .check(matches(isDisplayed()))
             .perform(click())
         return this
     }
 
     fun checkFields(localeName: String) {
-        onView(withId(languageTextField))
+        onView(withId(LANGUAGE_TEXT_FIELD))
             .check(matches(isDisplayed()))
             .check(matches(withText(getResourceString(R.string.language_field, localeName))))
-        onView(withId(themeTextField))
+        onView(withId(THEME_TEXT_FIELD))
             .check(matches(isDisplayed()))
             .check(matches(withText(getResourceString(R.string.theme_field, localeName))))
     }
