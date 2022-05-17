@@ -15,18 +15,9 @@ import com.polyactiveteam.polyactive.model.News
 import org.hamcrest.Matcher
 
 
-class FeedScreen {
+class FeedScreen: NavigableScreen() {
     private val feedFragment = R.id.feed_fragment
-    private val feedBottomNavItemId = R.id.action_feed
-    private val settingsBottomNavItemId = R.id.action_settings
     private val newsList = R.id.news_list
-
-    fun goToSettingsScreen(): SettingsScreen {
-        onView(withId(settingsBottomNavItemId))
-            .check(matches(isDisplayed()))
-            .perform()
-        return SettingsScreen()
-    }
 
     fun checkEqualityWithNewsOnPosition(news: News, position: Int): FeedScreen {
         onView(withId(newsList))

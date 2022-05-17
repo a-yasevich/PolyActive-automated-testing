@@ -9,8 +9,7 @@ class SettingsTest : BaseTest() {
 
     @Test
     fun switchToEnglishTest() {
-        val settingsScreen = LoginScreen()
-            .logIn()
+        LoginScreen().logIn()
             .goToSettingsScreen()
             .switchToEnglish()
             .checkFields("en")

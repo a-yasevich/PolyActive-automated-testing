@@ -10,19 +10,12 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.polyactiveteam.polyactive.R
 import java.util.*
 
-class SettingsScreen {
+class SettingsScreen : NavigableScreen() {
     companion object {
         private const val englishLanguageButton = R.id.language_iv2
         private const val languageTextField = R.id.language_tv
         private const val themeTextField = R.id.theme_tv
         private const val profileBottomNavItemId = R.id.action_profile
-    }
-
-    fun goToProfileScreen(): ProfileScreen {
-        onView(withId(profileBottomNavItemId))
-            .check(matches(isDisplayed()))
-            .perform(click())
-        return ProfileScreen()
     }
 
     fun switchToEnglish(): SettingsScreen {

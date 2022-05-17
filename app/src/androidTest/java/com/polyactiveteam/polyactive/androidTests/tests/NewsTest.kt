@@ -18,8 +18,7 @@ class NewsTest : BaseTest() {
 
     @Test
     fun viewTestNews() {
-        val feedScreen = LoginScreen()
-            .logIn()
+        LoginScreen().logIn()
             .checkEqualityWithNewsOnPosition(testNews, 0)
             .pressNewsAtPosition(0)
             .checkEquality(testNews)
