@@ -1,9 +1,7 @@
 package com.polyactiveteam.polyactive.androidTests.screens
 
-import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
-import androidx.test.InstrumentationRegistry.getTargetContext
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -44,9 +42,11 @@ class SettingsScreen {
     }
 
     private fun getResourceString(id: Int, localeName: String): String {
-        val resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
+        val config = Configuration()
         val locale = Locale(localeName)
-        resources.configuration.setLocale(locale)
+        config.locale = locale
+        val resources = InstrumentationRegistry.getInstrumentation().targetContext.resources
+        resources.updateConfiguration(config, resources.displayMetrics)
         return resources.getString(id)
     }
 
