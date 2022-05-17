@@ -1,21 +1,28 @@
 package com.polyactiveteam.polyactive.androidTests.screens
 
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
-import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.*
 import com.polyactiveteam.polyactive.R
+import com.polyactiveteam.polyactive.model.News
 
 class FeedScreen {
-
-    private val loginScreen: LoginScreen = LoginScreen()
     private val feedFragment = R.id.feed_fragment
-    private val actionFeed = R.id.action_feed
+    private val feedBottomNavItemId = R.id.action_feed
+    private val settingsBottomNavItemId = R.id.action_settings
 
-    fun get() {
-        loginScreen.logIn()
-        onView(withId(actionFeed)).check(matches(isDisplayed())).perform(ViewActions.click())
-        onView(withId(feedFragment)).check(matches(isDisplayed()))
+    fun goToSettingsScreen(): SettingsScreen {
+        onView(withId(settingsBottomNavItemId))
+            .check(matches(isDisplayed()))
+            .perform(click())
+        return SettingsScreen()
+    }
+
+    fun checkNews(news: News){
+    }
+
+    fun checkOpenNews(news: News){
+
     }
 }
