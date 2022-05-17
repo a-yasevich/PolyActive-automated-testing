@@ -1,10 +1,5 @@
 package com.polyactiveteam.polyactive.androidTests.tests.login
 
-import android.content.pm.ActivityInfo
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.Espresso.*
-import androidx.test.espresso.assertion.ViewAssertions
-import androidx.test.espresso.matcher.ViewMatchers
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.androidTests.screens.LoginScreen
 import com.polyactiveteam.polyactive.androidTests.tests.BaseTest
@@ -22,9 +17,11 @@ class NewsTest : BaseTest() {
     )
 
     @Test
-    fun checkOpenedNewsIsEqual() {
+    fun viewTestNews() {
         val feedScreen = LoginScreen()
             .logIn()
-            .checkNews(testNews)
+            .checkEqualityWithNewsOnPosition(testNews, 0)
+            .pressNewsAtPosition(0)
+            .checkEquality(testNews)
     }
 }

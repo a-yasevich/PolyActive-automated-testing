@@ -39,7 +39,7 @@ class NewsViewerFragment(private val news: News) : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        getBack()
+        //getBack()
     }
 
     private fun getBack() {
