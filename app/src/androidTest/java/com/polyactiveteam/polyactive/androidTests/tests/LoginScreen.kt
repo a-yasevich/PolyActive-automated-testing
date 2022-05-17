@@ -5,5 +5,5 @@ import com.agoda.kakao.text.KButton
 import com.polyactiveteam.polyactive.R
 
 object LoginScreen : Screen<LoginScreen>() {
-    val firstButton = KButton { withId(R.id.shadow_button) }
+    val loginButton = KButton { withId(R.id.shadow_button) }
 }

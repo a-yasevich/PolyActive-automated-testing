@@ -12,10 +12,10 @@ object FeedScreen : Screen<FeedScreen>() {
     val feedList: KRecyclerView = KRecyclerView({
         withId(R.id.news_list)
     }, itemTypeBuilder = {
-        itemType(::Item)
+        itemType(::NewsItem)
     })
 
-    internal class Item(parent: Matcher<View>) : KRecyclerItem<Item>(parent) {
+    internal class NewsItem(parent: Matcher<View>) : KRecyclerItem<NewsItem>(parent) {
         val header = KTextView(parent) { withId(R.id.news_card__news_header) }
     }
 }
