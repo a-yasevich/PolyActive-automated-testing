@@ -26,6 +26,26 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             )
             plugList.add(
                 News(
+                    R.drawable.ic_russia,
+                    Group.PROF,
+                    "Русские вперёд",
+                    "Новость действительно крутая",
+                    1648375200,
+                    0
+                )
+            )
+            plugList.add(
+                News(
+                    R.drawable.ic_uk,
+                    Group.PROF,
+                    "Крутая новость",
+                    "Новость действительно крутая",
+                    1648375200,
+                    0
+                )
+            )
+            plugList.add(
+                News(
                     R.drawable.ic_heart_plug,
                     Group.PROF,
                     "Крутая новость",
