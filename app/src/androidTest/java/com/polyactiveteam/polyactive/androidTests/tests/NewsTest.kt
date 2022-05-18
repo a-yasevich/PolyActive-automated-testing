@@ -1,26 +1,77 @@
 package com.polyactiveteam.polyactive.androidTests.tests
 
-import com.polyactiveteam.polyactive.R
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.polyactiveteam.polyactive.MainActivity
+import com.polyactiveteam.polyactive.androidTests.screens.FeedScreen
 import com.polyactiveteam.polyactive.androidTests.screens.LoginScreen
-import com.polyactiveteam.polyactive.androidTests.tests.BaseTest
+import com.polyactiveteam.polyactive.androidTests.screens.NewsScreen
 import com.polyactiveteam.polyactive.model.News
 import org.junit.Test
+import org.junit.runner.RunWith
+import kotlin.math.min
 
-class NewsTest : BaseTest() {
+@RunWith(AndroidJUnit4::class)
+class NewsTest :
+    BaseTest<MainActivity>(MainActivity::class.java) {
 
-    private val testNews = News(
-        R.drawable.ic_news_plug,
-        "Новый RecycleView",
-        "Команда PolyActive добавила RecycleView к своему проекту",
-        1648329900,
-        0
-    )
+    override fun onSetup() {}
 
     @Test
-    fun viewTestNews() {
-        LoginScreen().logIn()
-            .checkEqualityWithNewsOnPosition(testNews, 0)
-            .clickToViewNewsAtPosition(0)
-            .checkEquality(testNews)
+    fun checkNews() {
+        run {
+            step("Logging in") {
+                LoginScreen {
+                    loginButton {
+                        isVisible()
+                        click()
+                    }
+                }
+            }
+            step("View news one by one") {
+                for (i in 0 until min(10, FeedScreen.feedList.getSize())) {
+                    var news: News? = null
+                    step("Clicking on the i-th news") {
+                        FeedScreen {
+                            feedList {
+                                scrollToEnd() //It's solving issue with scrolling to last item
+                                scrollTo(i)
+                                isVisible()
+                                childAt<FeedScreen.NewsItem>(i) {
+                                    isVisible()
+                                    news = newsObj()
+                                    click()
+                                }
+                            }
+                        }
+                    }
+                    step(
+                        "Check that the news on the " +
+                                "view screen is the same as the one we clicked on"
+                    ) {
+                        NewsScreen {
+                            header {
+                                isVisible()
+                                hasText(news!!.header)
+                            }
+                            description {
+                                isVisible()
+                                hasText(news!!.newsDescription)
+                            }
+                            pressBack()
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+//class CheckAllButtonsAreVisible : Scenario() {
+//    override val steps: TestContext<Unit>.() -> Unit
+//        get() = {
+//            ManyStepsScreen {
+//                firstButton.isVisible()
+//                secondButton.isVisible()
+//                thirdButton.isVisible()
+//            }
+//        }
+//}

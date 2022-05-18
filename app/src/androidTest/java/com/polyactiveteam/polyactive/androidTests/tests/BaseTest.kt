@@ -1,15 +1,24 @@
 package com.polyactiveteam.polyactive.androidTests.tests
 
-import com.polyactiveteam.polyactive.MainActivity
+import android.app.Activity
+import androidx.test.core.app.ActivityScenario
+import com.kaspersky.kaspresso.testcases.api.testcase.TestCase
+import org.junit.After
+import org.junit.Before
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.Rule
-import org.junit.runner.RunWith
+abstract class BaseTest<T : Activity?>(private val kClass: Class<T>): TestCase() {
+    protected lateinit var activityScenario: ActivityScenario<T>
 
-@RunWith(AndroidJUnit4::class)
-open class BaseTest {
+    abstract fun onSetup()
 
-    @get:Rule
-    val startingScreenRule = ActivityScenarioRule(MainActivity::class.java)
+    @Before
+    fun setup() {
+        activityScenario = ActivityScenario.launch(kClass)
+        onSetup()
+    }
+
+    @After
+    fun close() {
+        activityScenario.close()
+    }
 }

@@ -1,4 +1,4 @@
-package com.polyactiveteam.polyactive.androidTests.screens
+package com.polyactiveteam.polyactive.androidTests.screens.pageobjs
 
 import android.content.res.Configuration
 import androidx.test.espresso.Espresso.onView

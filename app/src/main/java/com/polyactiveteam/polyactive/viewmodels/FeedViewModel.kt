@@ -17,7 +17,7 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
                 News(
                     R.drawable.ic_news_plug,
                     "Новый RecycleView",
-                    "Команда PolyActive добавила RecycleView к своему проекту",
+                    "Команда PolyActive добавила RecycleView к своему проекту".repeat(20),
                     1648329900,
                     0
                 )
@@ -25,6 +25,24 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             plugList.add(
                 News(
                     R.drawable.ic_heart_plug,
+                    "Крутая новость",
+                    "Новость действительно крутая",
+                    1648375200,
+                    0
+                )
+            )
+            plugList.add(
+                News(
+                    R.drawable.ic_russia,
+                    "Крутая новость",
+                    "Новость действительно крутая",
+                    1648375200,
+                    0
+                )
+            )
+            plugList.add(
+                News(
+                    R.drawable.ic_uk,
                     "Крутая новость",
                     "Новость действительно крутая",
                     1648375200,
