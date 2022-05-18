@@ -23,7 +23,12 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
+    private var selectedTab: Int? = 0
     private val adapter = NewsAdapter()
+
+    companion object {
+        private const val LAST_TAB_SELECTED = "tab"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,10 +75,29 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
+        selectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        val manager =  binding.newsList.layoutManager as LinearLayoutManager
+        manager.findFirstVisibleItemPosition()
+        outState.putInt(LAST_TAB_SELECTED, binding.tabLayout.selectedTabPosition)
     }
 
     override fun onStart() {
         super.onStart()
         mViewModel.newsLiveData.observe(this, adapter::addAllItems)
     }
+
+    override fun onResume() {
+        super.onResume()
+        val tabLayout = binding.tabLayout
+        val selectedTab = selectedTab
+        if (selectedTab != null) {
+            tabLayout.selectTab(tabLayout.getTabAt(selectedTab))
+        }
+    }
+
 }
