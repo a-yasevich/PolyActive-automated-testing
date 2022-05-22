@@ -29,7 +29,7 @@ object FeedScreen : Screen<FeedScreen>() {
         private fun KTextView.text(): String {
             var text = ""
             this.view.interaction.perform(
-                (object : ViewAction {
+                object : ViewAction {
                     override fun getConstraints(): Matcher<View> {
                         return isAssignableFrom(TextView::class.java)
                     }
@@ -42,7 +42,7 @@ object FeedScreen : Screen<FeedScreen>() {
                         val tv = view as TextView
                         text = tv.text.toString()
                     }
-                })
+                }
             )
             return text
         }

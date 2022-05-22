@@ -33,7 +33,6 @@ class NewsTest :
                     step("Clicking on the i-th news") {
                         FeedScreen {
                             feedList {
-                                scrollToEnd() //It's solving issue with scrolling to last item
                                 scrollTo(i)
                                 isVisible()
                                 childAt<FeedScreen.NewsItem>(i) {
@@ -44,10 +43,7 @@ class NewsTest :
                             }
                         }
                     }
-                    step(
-                        "Check that the news on the " +
-                                "view screen is the same as the one we clicked on"
-                    ) {
+                    step("Check that news is the same as the one we clicked on") {
                         NewsScreen {
                             header {
                                 isVisible()
