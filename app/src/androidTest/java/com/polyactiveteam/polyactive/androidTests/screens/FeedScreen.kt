@@ -13,7 +13,7 @@ import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.model.News
 import org.hamcrest.Matcher
 
-object FeedScreen : Screen<FeedScreen>() {
+object FeedScreen : Screen<FeedScreen>(), NavigableScreen {
     val feedList: KRecyclerView = KRecyclerView({
         withId(R.id.news_list)
     }, itemTypeBuilder = {
