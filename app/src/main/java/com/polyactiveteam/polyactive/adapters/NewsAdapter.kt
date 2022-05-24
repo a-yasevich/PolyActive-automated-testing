@@ -12,11 +12,12 @@ import com.polyactiveteam.polyactive.databinding.NewsItemBinding
 import com.polyactiveteam.polyactive.fragments.NewsViewerFragment
 import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
+import com.polyactiveteam.polyactive.model.VkGroup
 
 class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
 
-    private val newsList = mutableListOf<News>()
-    private var crutchList = newsList
+    private val news = mutableMapOf<VkGroup, List<News>>()
+    private var currentNewsType = VkGroup.GROUP_ALL
     lateinit var fragmentManager: FragmentManager
 
     class NewsHolder(itemView: View, private val fragmentManager: FragmentManager) :
@@ -59,19 +60,24 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     }
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
-        holder.bind(crutchList[position])
+        holder.bind(news[currentNewsType]!![position])
     }
 
     override fun getItemCount(): Int {
-        return crutchList.size
+        return news[currentNewsType]?.size ?: 0
     }
 
-    fun changeType(group: Group) {
-        crutchList = newsList.filter { group == Group.ALL || it.groupType == group }
-            .toMutableList()
+    fun changeType(group: VkGroup) {
+        currentNewsType = group
     }
 
-    fun addAllItems(news: ArrayList<News>) {
-        newsList.addAll(news)
+    fun addAllItems(news: Map<VkGroup, List<News>>) {
+        this.news.putAll(news)
+        val allNews = news.flatMap { (_, value) -> value }.sortedWith { o1, o2 ->
+            o1.date.compareTo(
+                o2.date
+            )
+        }
+        this.news[VkGroup.GROUP_ALL] = allNews
     }
 }

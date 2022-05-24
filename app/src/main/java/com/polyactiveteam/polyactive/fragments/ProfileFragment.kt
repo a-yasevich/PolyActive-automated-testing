@@ -21,6 +21,7 @@ import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import com.polyactiveteam.polyactive.model.Group
+import com.polyactiveteam.polyactive.model.VkGroup
 import java.net.URL
 import java.util.*
 import kotlin.String
@@ -33,11 +34,11 @@ class ProfileFragment : Fragment() {
     private lateinit var gsc: GoogleSignInClient
     private lateinit var preferences: SharedPreferences
 
-    //singleton
     private val user: User = User()
 
     companion object {
-        val GROUPS_KEY = "Groups";
+        const val USER_PREFS_FILE_NAME = "UserPrefs"
+        const val GROUPS_KEY = "Groups"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -92,13 +93,13 @@ class ProfileFragment : Fragment() {
                     .setImageBitmap(user.googleProfilePicBitmap)
             }
             profButton.setOnClickListener {
-                switchGroupButtonState(it, Group.PROF)
+                switchGroupButtonState(it, VkGroup.PROF)
             }
             adaptersButton.setOnClickListener {
-                switchGroupButtonState(it, Group.ADAPTERS)
+                switchGroupButtonState(it, VkGroup.ADAPTERS)
             }
             brigadesButton.setOnClickListener {
-                switchGroupButtonState(it, Group.BRIGADES)
+                switchGroupButtonState(it, VkGroup.STUD_BRIGADES)
             }
         }
         return binding.root
@@ -109,15 +110,15 @@ class ProfileFragment : Fragment() {
         binding.buttonExit.setOnClickListener {
             signOut()
         }
-        preferences = view.context.getSharedPreferences(GROUPS_KEY, Context.MODE_PRIVATE)
-        preferences.getStringSet(GROUPS_KEY, emptySet())?.map { s: String -> Group.valueOf(s) }
+        preferences = view.context.getSharedPreferences(USER_PREFS_FILE_NAME, Context.MODE_PRIVATE)
+        preferences.getStringSet(GROUPS_KEY, emptySet())?.map { s: String -> VkGroup.valueOf(s) }
             ?.forEach {
                 user.groups.add(it)
             }
         with(binding) {
-            resolveGroupButtonState(profButton, Group.PROF)
-            resolveGroupButtonState(adaptersButton, Group.ADAPTERS)
-            resolveGroupButtonState(brigadesButton, Group.BRIGADES)
+            resolveGroupButtonState(profButton, VkGroup.PROF)
+            resolveGroupButtonState(adaptersButton, VkGroup.ADAPTERS)
+            resolveGroupButtonState(brigadesButton, VkGroup.STUD_BRIGADES)
         }
     }
 
@@ -139,7 +140,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun switchGroupButtonState(button: View, group: Group) {
+    private fun switchGroupButtonState(button: View, group: VkGroup) {
         val userGroups = user.groups
         if (group in userGroups) {
             userGroups.remove(group)
@@ -155,7 +156,7 @@ class ProfileFragment : Fragment() {
         var lastName: String = "Last Name"
         var googleProfilePicBitmap: Bitmap? = null
 
-        val groups: EnumSet<Group> = EnumSet.noneOf(Group::class.java)
+        val groups: EnumSet<VkGroup> = EnumSet.noneOf(VkGroup::class.java)
 
         override fun toString(): String {
             return "$firstName $lastName"

@@ -17,6 +17,7 @@ import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.model.Group
+import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
@@ -53,23 +54,23 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val groupsSet: Set<Group> =
-            view.context.getSharedPreferences(ProfileFragment.GROUPS_KEY, Context.MODE_PRIVATE)
+        val groupsSet: Set<VkGroup> =
+            view.context.getSharedPreferences(ProfileFragment.USER_PREFS_FILE_NAME, Context.MODE_PRIVATE)
                 .getStringSet(ProfileFragment.GROUPS_KEY, emptySet())
-                ?.map { string -> Group.valueOf(string) }
+                ?.map { string -> VkGroup.valueOf(string) }
                 ?.toSet() ?: emptySet()
         val tabLayout = binding.tabLayout
         groupsSet.forEach {
             tabLayout.addTab(
                 with(tabLayout.newTab()) {
-                    setText(view.resources.getString(it.id))
-                    setId(it.id)
+                    setText(view.resources.getString(it.stringResId))
+                    setId(it.stringResId)
                 })
         }
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onTabSelected(tab: TabLayout.Tab) {
-                adapter.changeType(Group.groupByID(tab.id))
+                adapter.changeType(VkGroup.groupByID(tab.id))
                 adapter.notifyDataSetChanged()
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {}
