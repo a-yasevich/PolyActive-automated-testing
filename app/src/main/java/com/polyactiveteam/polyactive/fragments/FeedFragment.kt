@@ -16,7 +16,6 @@ import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
-import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 
@@ -24,11 +23,13 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
-    private var selectedTab: Int? = 0
+    private var lastSelectedTab: Int? = 0
+    private var lastVisibleNews: Int? = 0
     private val adapter = NewsAdapter()
 
     companion object {
-        private const val LAST_TAB_SELECTED = "tab"
+        private const val LAST_TAB_SELECTED = "Tab"
+        private const val LAST_NEWS_VISIBLE = "News"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +56,10 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val groupsSet: Set<VkGroup> =
-            view.context.getSharedPreferences(ProfileFragment.USER_PREFS_FILE_NAME, Context.MODE_PRIVATE)
+            view.context.getSharedPreferences(
+                ProfileFragment.USER_PREFS_FILE_NAME,
+                Context.MODE_PRIVATE
+            )
                 .getStringSet(ProfileFragment.GROUPS_KEY, emptySet())
                 ?.map { string -> VkGroup.valueOf(string) }
                 ?.toSet() ?: emptySet()
@@ -73,18 +77,22 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                 adapter.changeType(VkGroup.groupByID(tab.id))
                 adapter.notifyDataSetChanged()
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-        selectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
+        lastSelectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
+        lastVisibleNews = savedInstanceState?.getInt(LAST_NEWS_VISIBLE)
 
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        val manager =  binding.newsList.layoutManager as LinearLayoutManager
-        manager.findFirstVisibleItemPosition()
-        outState.putInt(LAST_TAB_SELECTED, binding.tabLayout.selectedTabPosition)
+        with(binding) {
+            val manager = newsList.layoutManager as LinearLayoutManager
+            outState.putInt(LAST_NEWS_VISIBLE, manager.findLastVisibleItemPosition())
+            outState.putInt(LAST_TAB_SELECTED, tabLayout.selectedTabPosition)
+        }
     }
 
     override fun onStart() {
@@ -94,10 +102,9 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     override fun onResume() {
         super.onResume()
-        val tabLayout = binding.tabLayout
-        val selectedTab = selectedTab
-        if (selectedTab != null) {
-            tabLayout.selectTab(tabLayout.getTabAt(selectedTab))
+        with(binding) {
+            tabLayout.selectTab(lastSelectedTab?.let { tabLayout.getTabAt(it) })
+            lastVisibleNews?.let { newsList.layoutManager?.scrollToPosition(it) }
         }
     }
 
