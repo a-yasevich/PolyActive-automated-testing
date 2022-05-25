@@ -2,6 +2,7 @@ package com.polyactiveteam.polyactive.fragments
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
+import kotlin.math.max
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
@@ -59,18 +61,33 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             view.context.getSharedPreferences(
                 ProfileFragment.USER_PREFS_FILE_NAME,
                 Context.MODE_PRIVATE
-            )
-                .getStringSet(ProfileFragment.GROUPS_KEY, emptySet())
+            ).getStringSet(ProfileFragment.GROUPS_KEY, emptySet())
                 ?.map { string -> VkGroup.valueOf(string) }
                 ?.toSet() ?: emptySet()
+
         val tabLayout = binding.tabLayout
         groupsSet.forEach {
             tabLayout.addTab(
-                with(tabLayout.newTab()) {
-                    setText(view.resources.getString(it.stringResId))
-                    setId(it.stringResId)
+                tabLayout.newTab().apply {
+                    text = view.resources.getString(it.stringResId)
+                    id = it.stringResId
                 })
         }
+
+        tabLayout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            var totalTabsWith = 0
+            var maxTabWith = 0
+            for (i in 0 until tabLayout.tabCount) {
+                val tabWidth = (tabLayout.getChildAt(0) as ViewGroup).getChildAt(i)!!.width
+                totalTabsWith += tabWidth
+                maxTabWith = max(maxTabWith, tabWidth)
+            }
+            val screenWidth = Resources.getSystem().displayMetrics.widthPixels
+            if (totalTabsWith < screenWidth && screenWidth / tabLayout.tabCount >= maxTabWith) {
+                tabLayout.tabMode = TabLayout.MODE_FIXED
+            }
+        }
+
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             @SuppressLint("NotifyDataSetChanged")
             override fun onTabSelected(tab: TabLayout.Tab) {
