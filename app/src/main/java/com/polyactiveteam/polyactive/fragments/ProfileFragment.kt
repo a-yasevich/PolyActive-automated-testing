@@ -19,6 +19,7 @@ import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import java.net.URL
+import com.polyactiveteam.polyactive.model.VkGroups
 import java.util.*
 
 class ProfileFragment : Fragment() {
@@ -82,13 +83,13 @@ class ProfileFragment : Fragment() {
                     .setImageBitmap(user.googleProfilePicBitmap)
             }
             profButton.setOnClickListener {
-                setColor(it, Groups.PROF)
+                setColor(it, VkGroups.PROF)
             }
             adaptersButton.setOnClickListener {
-                setColor(it, Groups.ADAPTERS)
+                setColor(it, VkGroups.ADAPTERS)
             }
             brigadesButton.setOnClickListener {
-                setColor(it, Groups.BRIGADES)
+                setColor(it, VkGroups.STUD_BRIGADES)
             }
         }
         return binding.root
@@ -106,7 +107,7 @@ class ProfileFragment : Fragment() {
         findNavController().navigate(R.id.from_profile_to_login)
     }
 
-    private fun setColor(it: View, group: Groups) {
+    private fun setColor(it: View, group: VkGroups) {
         when (user.processGroup(group)) {
             Answer.REMOVE -> {
                 it.setBackgroundResource(R.drawable.ic_group_button_deactive)
@@ -120,13 +121,13 @@ class ProfileFragment : Fragment() {
         var lastName: String = "Last Name"
         var googleProfilePicBitmap: Bitmap? = null
 
-        private val groups: EnumSet<Groups> = EnumSet.noneOf(Groups::class.java)
+        private val groups: EnumSet<VkGroups> = EnumSet.noneOf(VkGroups::class.java)
 
         override fun toString(): String {
             return "$firstName $lastName"
         }
 
-        fun processGroup(group: Groups): Answer {
+        fun processGroup(group: VkGroups): Answer {
             if (group in groups) {
                 groups.remove(group)
                 return Answer.REMOVE
@@ -135,10 +136,6 @@ class ProfileFragment : Fragment() {
             return Answer.ADD
         }
 
-    }
-
-    enum class Groups {
-        ADAPTERS, BRIGADES, PROF
     }
 
     enum class Answer {
