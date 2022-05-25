@@ -19,7 +19,6 @@ import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
-import kotlin.math.max
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
@@ -66,6 +65,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                 ?.toSet() ?: emptySet()
 
         val tabLayout = binding.tabLayout
+
         groupsSet.forEach {
             tabLayout.addTab(
                 tabLayout.newTab().apply {
@@ -74,18 +74,15 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                 })
         }
 
-        tabLayout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            var totalTabsWith = 0
-            var maxTabWith = 0
-            for (i in 0 until tabLayout.tabCount) {
-                val tabWidth = (tabLayout.getChildAt(0) as ViewGroup).getChildAt(i)!!.width
-                totalTabsWith += tabWidth
-                maxTabWith = max(maxTabWith, tabWidth)
-            }
-            val screenWidth = Resources.getSystem().displayMetrics.widthPixels
-            if (totalTabsWith < screenWidth && screenWidth / tabLayout.tabCount >= maxTabWith) {
-                tabLayout.tabMode = TabLayout.MODE_FIXED
-            }
+        var totalTabsWidth = 0
+        for (i in 0 until tabLayout.childCount) {
+            val tabView = tabLayout.getChildAt(i)
+            tabView.measure(0, 0)
+            totalTabsWidth += tabView.measuredWidth
+        }
+        val screenWidth = Resources.getSystem().displayMetrics.widthPixels
+        if (totalTabsWidth < screenWidth) {
+            tabLayout.tabMode = TabLayout.MODE_FIXED
         }
 
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
