@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.NewsItemBinding
 import com.polyactiveteam.polyactive.fragments.NewsViewerFragment
-import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
 
@@ -74,8 +73,8 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
     fun addAllItems(news: Map<VkGroup, List<News>>) {
         this.news.putAll(news)
         val allNews = news.flatMap { (_, value) -> value }.sortedWith { o1, o2 ->
-            o1.date.compareTo(
-                o2.date
+            o2.date.compareTo(
+                o1.date
             )
         }
         this.news[VkGroup.GROUP_ALL] = allNews
