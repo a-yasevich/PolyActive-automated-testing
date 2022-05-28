@@ -19,6 +19,7 @@ import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
+import kotlin.math.max
 
 class FeedFragment : Fragment(R.layout.fragment_feed) {
 
@@ -98,6 +99,23 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         lastSelectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
         lastVisibleNews = savedInstanceState?.getInt(LAST_NEWS_VISIBLE)
 
+    }
+
+    private fun setupTabLayoutMode(tabLayout: TabLayout) {
+        var totalTabsWith = 0
+        var maxTabWith = 0
+        val tabViewGroup = tabLayout.getChildAt(0) as ViewGroup
+        for (i in 0 until tabLayout.tabCount) {
+            val tabWidth = tabViewGroup.getChildAt(i).width
+            totalTabsWith += tabWidth
+            maxTabWith = max(maxTabWith, tabWidth)
+        }
+        val screenWidth = Resources.getSystem().displayMetrics.widthPixels
+        if (totalTabsWith < screenWidth) {
+            tabLayout.tabMode =
+                if (screenWidth < maxTabWith * tabLayout.tabCount) TabLayout.MODE_AUTO
+                else TabLayout.MODE_FIXED
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
