@@ -75,15 +75,8 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
                 })
         }
 
-        var totalTabsWidth = 0
-        for (i in 0 until tabLayout.childCount) {
-            val tabView = tabLayout.getChildAt(i)
-            tabView.measure(0, 0)
-            totalTabsWidth += tabView.measuredWidth
-        }
-        val screenWidth = Resources.getSystem().displayMetrics.widthPixels
-        if (totalTabsWidth < screenWidth) {
-            tabLayout.tabMode = TabLayout.MODE_FIXED
+        tabLayout.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+            setupTabLayoutMode(tabLayout)
         }
 
         tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
