@@ -7,8 +7,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        app:tabMode="scrollable"
-        app:tabGravity="fill"
+        app:tabMode="auto"
         app:tabMaxWidth="2000dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

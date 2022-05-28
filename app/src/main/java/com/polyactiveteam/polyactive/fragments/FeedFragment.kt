@@ -95,19 +95,15 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     }
 
     private fun setupTabLayoutMode(tabLayout: TabLayout) {
-        var totalTabsWith = 0
         var maxTabWith = 0
         val tabViewGroup = tabLayout.getChildAt(0) as ViewGroup
         for (i in 0 until tabLayout.tabCount) {
             val tabWidth = tabViewGroup.getChildAt(i).width
-            totalTabsWith += tabWidth
             maxTabWith = max(maxTabWith, tabWidth)
         }
         val screenWidth = Resources.getSystem().displayMetrics.widthPixels
-        if (totalTabsWith < screenWidth) {
-            tabLayout.tabMode =
-                if (screenWidth < maxTabWith * tabLayout.tabCount) TabLayout.MODE_AUTO
-                else TabLayout.MODE_FIXED
+        if (maxTabWith * tabLayout.tabCount < screenWidth) {
+            tabLayout.tabMode = TabLayout.MODE_FIXED
         }
     }
 
