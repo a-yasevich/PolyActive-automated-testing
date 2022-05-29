@@ -21,7 +21,7 @@ import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 import kotlin.math.max
 
-class FeedFragment : Fragment(R.layout.fragment_feed) {
+class FeedFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
