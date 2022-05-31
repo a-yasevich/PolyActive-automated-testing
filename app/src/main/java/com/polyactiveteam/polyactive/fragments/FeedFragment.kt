@@ -39,6 +39,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         mViewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_feed)
+        binding = FragmentFeedBinding.inflate(layoutInflater)
     }
 
     override fun onCreateView(
@@ -110,8 +111,11 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         with(binding) {
-            val manager = newsList.layoutManager as LinearLayoutManager
-            outState.putInt(LAST_NEWS_VISIBLE, manager.findLastVisibleItemPosition())
+            val manager = newsList.layoutManager
+            manager?.let {
+                val newsVisible = (manager as LinearLayoutManager).findLastVisibleItemPosition()
+                outState.putInt(LAST_NEWS_VISIBLE, newsVisible)
+            }
             outState.putInt(LAST_TAB_SELECTED, tabLayout.selectedTabPosition)
         }
     }
