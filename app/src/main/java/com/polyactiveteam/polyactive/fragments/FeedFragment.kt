@@ -21,7 +21,7 @@ import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 import kotlin.math.max
 
-class FeedFragment : Fragment(R.layout.fragment_feed) {
+class FeedFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
@@ -36,9 +36,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        mViewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_feed)
         binding = FragmentFeedBinding.inflate(layoutInflater)
     }
 
@@ -58,6 +55,9 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
+        mViewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_feed)
         val groupsSet: Set<VkGroup> =
             view.context.getSharedPreferences(
                 ProfileFragment.USER_PREFS_FILE_NAME,
@@ -93,6 +93,7 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
         lastSelectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
         lastVisibleNews = savedInstanceState?.getInt(LAST_NEWS_VISIBLE)
 
+        mViewModel.getLiveData().observe(viewLifecycleOwner, adapter::addAllItems)
     }
 
     private fun setupTabLayoutMode(tabLayout: TabLayout) {
@@ -118,11 +119,6 @@ class FeedFragment : Fragment(R.layout.fragment_feed) {
             }
             outState.putInt(LAST_TAB_SELECTED, tabLayout.selectedTabPosition)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mViewModel.newsLiveData.observe(this, adapter::addAllItems)
     }
 
     override fun onResume() {
