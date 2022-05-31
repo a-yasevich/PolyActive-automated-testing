@@ -6,9 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.databinding.ActivityMainBinding
-import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.services.SettingsManager
 
 class MainActivity : AppCompatActivity() {

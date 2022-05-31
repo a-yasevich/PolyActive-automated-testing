@@ -2,6 +2,7 @@ package com.polyactiveteam.polyactive.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
@@ -9,7 +10,7 @@ import com.polyactiveteam.polyactive.services.NewsService
 
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
 
-    val newsLiveData = MutableLiveData<Map<VkGroup, List<News>>>()
+    private val newsLiveData = MutableLiveData<Map<VkGroup, List<News>>>()
 
     init {
         val plugMap = mapOf(
@@ -18,5 +19,9 @@ class FeedViewModel(application: Application) : AndroidViewModel(application) {
             VkGroup.STUD_BRIGADES to NewsService.getPostsFromGroup(VkGroup.STUD_BRIGADES, 2)
         )
         newsLiveData.value = plugMap
+    }
+
+    fun getLiveData(): LiveData<Map<VkGroup, List<News>>> {
+        return newsLiveData
     }
 }
