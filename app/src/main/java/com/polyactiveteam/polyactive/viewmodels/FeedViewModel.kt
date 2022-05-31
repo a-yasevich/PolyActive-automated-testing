@@ -9,7 +9,8 @@ import com.polyactiveteam.polyactive.model.VkGroup
 import com.polyactiveteam.polyactive.services.NewsService
 
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
-
+    var tabSelected: Int? = null
+    var newsVisible: Int? = null
     private val newsLiveData = MutableLiveData<Map<VkGroup, List<News>>>()
 
     init {
