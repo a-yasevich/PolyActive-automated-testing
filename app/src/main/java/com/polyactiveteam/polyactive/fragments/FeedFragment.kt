@@ -25,8 +25,6 @@ class FeedFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
-    private var lastSelectedTab: Int? = 0
-    private var lastVisibleNews: Int? = 0
     private val adapter = NewsAdapter()
 
     companion object {
@@ -56,7 +54,7 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        mViewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
+        mViewModel = ViewModelProvider(requireActivity()).get(FeedViewModel::class.java)
         (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_feed)
         val groupsSet: Set<VkGroup> =
             view.context.getSharedPreferences(
@@ -90,8 +88,6 @@ class FeedFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-        lastSelectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
-        lastVisibleNews = savedInstanceState?.getInt(LAST_NEWS_VISIBLE)
 
         mViewModel.getLiveData().observe(viewLifecycleOwner, adapter::addAllItems)
     }
@@ -109,23 +105,25 @@ class FeedFragment : Fragment() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+    override fun onStop() {
+        super.onStop()
         with(binding) {
-            val manager = newsList.layoutManager
+            val manager = newsList.layoutManager as LinearLayoutManager?
             manager?.let {
-                val newsVisible = (manager as LinearLayoutManager).findLastVisibleItemPosition()
-                outState.putInt(LAST_NEWS_VISIBLE, newsVisible)
+                mViewModel.newsVisible = max(
+                    it.findFirstCompletelyVisibleItemPosition(),
+                    it.findFirstVisibleItemPosition()
+                )
             }
-            outState.putInt(LAST_TAB_SELECTED, tabLayout.selectedTabPosition)
+            mViewModel.tabSelected = tabLayout.selectedTabPosition
         }
     }
 
     override fun onResume() {
         super.onResume()
         with(binding) {
-            tabLayout.selectTab(lastSelectedTab?.let { tabLayout.getTabAt(it) })
-            lastVisibleNews?.let { newsList.layoutManager?.scrollToPosition(it) }
+            mViewModel.tabSelected?.let { tabLayout.selectTab(tabLayout.getTabAt(it)) }
+            mViewModel.newsVisible?.let { newsList.layoutManager?.scrollToPosition(it) }
         }
     }
 
