@@ -20,8 +20,7 @@ import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentLoginBinding
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 
-
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var profileBinding: FragmentProfileBinding

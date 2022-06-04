@@ -11,24 +11,13 @@
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tabGravity="fill"
-        app:tabMaxWidth="0dp"
-        app:tabMode="fixed">
+        app:tabMode="auto"
+        app:tabMaxWidth="2000dp">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/tab_item_group_1" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/tab_item_group_2" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="@string/tab_item_group_3" />
+            android:text="@string/tab_item_groups_all" />
 
     </com.google.android.material.tabs.TabLayout>
 
