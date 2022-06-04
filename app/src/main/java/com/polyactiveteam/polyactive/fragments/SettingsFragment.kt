@@ -14,18 +14,17 @@ class SettingsFragment : Fragment() {
 
     lateinit var binding: FragmentSettingsBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_settings)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
-        // Inflate the layout for this fragment
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_settings)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,11 +38,11 @@ class SettingsFragment : Fragment() {
         }
         binding.themeIv1.setOnClickListener {
             SettingsManager.updateTheme(false, view.context)
-            activity?.recreate()
+            //activity?.recreate() //Seems there is no need for that
         }
         binding.themeIv2.setOnClickListener {
             SettingsManager.updateTheme(true, view.context)
-            activity?.recreate()
+            //activity?.recreate() //Seems there is no need for that
         }
         super.onViewCreated(view, savedInstanceState)
     }

@@ -1,6 +1,7 @@
 package com.polyactiveteam.polyactive.services
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatDelegate
 import java.util.Locale
@@ -17,15 +18,18 @@ class SettingsManager {
             Locale.setDefault(locale)
             val res = context.resources
             val config = Configuration(res.configuration)
-            persist(language, context)
             config.setLocale(locale)
+            persist(context) {
+                putString(LANG_KEY, language)
+            }
             return context.createConfigurationContext(config)
         }
 
         fun updateTheme(nightModeEnabled: Boolean, context: Context) {
-            persist(nightModeEnabled, context)
-            val mode = mode(nightModeEnabled)
-            AppCompatDelegate.setDefaultNightMode(mode)
+            persist(context) {
+                putBoolean(THEME_KEY, nightModeEnabled)
+            }
+            AppCompatDelegate.setDefaultNightMode(mode(nightModeEnabled))
         }
 
         fun updateWithPersisted(
@@ -39,22 +43,13 @@ class SettingsManager {
             return updateLanguage(language, context)
         }
 
-        private fun persist(language: String, context: Context) {
+        private inline fun persist(context: Context, action: SharedPreferences.Editor.() -> Unit) {
             val preferences = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
             with(preferences.edit()) {
-                putString(LANG_KEY, language)
+                action()
                 apply()
             }
         }
-
-        private fun persist(nightModeEnabled: Boolean, context: Context) {
-            val preferences = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
-            with(preferences.edit()) {
-                putBoolean(THEME_KEY, nightModeEnabled)
-                apply()
-            }
-        }
-
 
         private fun getPersistedData(context: Context, defaultLanguage: String): String {
             val preferences = context.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
