@@ -63,13 +63,11 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
                     .into(newsCardNewsImage)
 
             }
-            newsCardNewsHeader.text = news.header
             newsCardSmallDescription.text = news.newsDescription
             newsCardNewsDate.text = news.date
             binding.newsCard.setOnClickListener {
                 val bundle: Bundle = bundleOf(
                     "imageLink" to news.imageLink,
-                    "header" to news.header,
                     "newsDescription" to news.newsDescription,
                     "date" to news.date,
                     "likeCounter" to news.likeCounter,

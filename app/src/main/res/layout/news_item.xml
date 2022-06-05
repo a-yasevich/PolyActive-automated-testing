@@ -37,19 +37,6 @@
                 android:background="@color/lunar_green">
 
                 <TextView
-                    android:id="@+id/news_card__news_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="6dp"
-                    android:textColor="@color/titan_white"
-                    android:textSize="@dimen/header_text"
-                    android:textStyle="bold"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Заголовок новости" />
-
-                <TextView
                     android:id="@+id/news_card__news_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,7 +57,7 @@
                     android:textColor="@color/titan_white"
                     android:textSize="@dimen/standard_text"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/news_card__news_header"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="Краткое описание новости" />
 
                 <ImageView

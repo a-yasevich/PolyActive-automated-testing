@@ -1,7 +1,9 @@
 package com.polyactiveteam.polyactive.fragments
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -34,7 +36,6 @@ class NewsViewerFragment() : Fragment() {
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         val news = News(
             arguments?.getString("imageLink"),
-            arguments?.getString("header")!!,
             arguments?.getString("newsDescription")!!,
             arguments?.getString("date")!!,
             arguments?.getInt("likeCounter")!!
@@ -45,15 +46,17 @@ class NewsViewerFragment() : Fragment() {
                     .load(news.imageLink)
                     .into(newsViewerNewsImage)
             }
-            newsViewerHeader.text = news.header
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()
             newsViewerDate.text = news.date
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val textView = requireActivity().findViewById(R.id.news_viewer__description) as TextView
+        textView.movementMethod = ScrollingMovementMethod.getInstance()
         requireView().setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
                 getBack()
