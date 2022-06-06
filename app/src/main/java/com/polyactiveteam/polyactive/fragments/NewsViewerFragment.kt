@@ -1,5 +1,6 @@
 package com.polyactiveteam.polyactive.fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +26,9 @@ class NewsViewerFragment(private val news: News) : Fragment() {
         bottomNavigation.visibility = View.GONE
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         with(binding) {
-            if (news.imageLink != null) {
-                Glide.with(this@NewsViewerFragment)
-                    .load(news.imageLink)
-                    .into(newsViewerNewsImage)
+            if (news.imageFuture != null) {
+                val image: Bitmap = news.imageFuture.get()
+                newsViewerNewsImage.setImageBitmap(image)
             }
             newsViewerHeader.text = news.header
             newsViewerDescription.text = news.newsDescription

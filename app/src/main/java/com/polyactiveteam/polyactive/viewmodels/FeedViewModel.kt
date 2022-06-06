@@ -11,18 +11,14 @@ import com.polyactiveteam.polyactive.services.NewsService
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
     var tabSelected: Int? = null
     var newsVisible: Int? = null
-    private val newsLiveData = MutableLiveData<Map<VkGroup, List<News>>>()
+    private val newsLiveData = MutableLiveData<MutableMap<VkGroup, MutableSet<News>>>()
 
     init {
-        val plugMap = mapOf(
-            VkGroup.ADAPTERS to NewsService.getPostsFromGroup(VkGroup.ADAPTERS, 2),
-            VkGroup.PROF to NewsService.getPostsFromGroup(VkGroup.PROF, 2),
-            VkGroup.STUD_BRIGADES to NewsService.getPostsFromGroup(VkGroup.STUD_BRIGADES, 2)
-        )
+        val plugMap = NewsService.getPostsFromAllGroups(5)
         newsLiveData.value = plugMap
     }
 
-    fun getLiveData(): LiveData<Map<VkGroup, List<News>>> {
+    fun getLiveData(): LiveData<MutableMap<VkGroup, MutableSet<News>>> {
         return newsLiveData
     }
 }

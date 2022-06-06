@@ -2,6 +2,7 @@ package com.polyactiveteam.polyactive.services
 
 import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
+import com.polyactiveteam.polyactive.model.VkGroup
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -16,7 +17,7 @@ class NewsService {
         private const val getPostsUrl = "https://api.vk.com/method/wall.get"
         private val client = OkHttpClient()
 
-        fun getPostsFromGroup(group: Group, postCount: Int): List<News> {
+        fun getPostsFromGroup(group: Group, postCount: Int): MutableSet<News> {
 
             val url: String = getPostsUrl.toHttpUrlOrNull()!!
                 .newBuilder()
@@ -31,7 +32,7 @@ class NewsService {
                 .Builder()
                 .url(url)
                 .build()
-            val news = ArrayList<News>()
+            val news = HashSet<News>()
             val thread = Thread {
                 client.newCall(request).execute().use {
                     val jsonArray: JSONArray = JSONObject(it.body!!.string())
@@ -45,6 +46,14 @@ class NewsService {
             thread.start()
             thread.join()
             return news
+        }
+
+        fun getPostsFromAllGroups(count: Int): MutableMap<VkGroup, MutableSet<News>> {
+            return mutableMapOf(
+                VkGroup.ADAPTERS to getPostsFromGroup(VkGroup.ADAPTERS, count),
+                VkGroup.PROF to getPostsFromGroup(VkGroup.PROF, count),
+                VkGroup.STUD_BRIGADES to getPostsFromGroup(VkGroup.STUD_BRIGADES, count)
+            )
         }
     }
 }
