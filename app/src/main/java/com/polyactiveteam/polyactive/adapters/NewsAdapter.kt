@@ -87,10 +87,11 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         private val binding = NewsItemBinding.bind(itemView)
 
         fun bind(news: News) = with(binding) {
-            if (news.imageFuture != null) {
-                val image: Bitmap = news.imageFuture.get()
+            val image: Bitmap? = news.getImageBitmap()
+            if (image != null) {
                 newsCardNewsImage.setImageBitmap(image)
             }
+
             newsCardNewsHeader.text = news.header
             newsCardSmallDescription.text = news.newsDescription
             newsCardNewsDate.text = news.date

@@ -14,6 +14,7 @@ import java.util.concurrent.Future
 data class News(
     val id: Int,
     val imageFuture: Future<Bitmap>?,
+    var image: Bitmap?,
     val header: String,
     val newsDescription: String,
     val date: String,
@@ -53,8 +54,22 @@ data class News(
             val dateLong = json.getLong("date")
             val date: String = formatter.format(Date(dateLong * 1000))
             val likes: Int = json.getJSONObject("likes").getInt("count")
-            return News(id, imageFuture, header, text, date, dateLong, likes)
+            return News(id, imageFuture, null, header, text, date, dateLong, likes)
         }
+    }
+
+    fun getImageBitmap(): Bitmap? {
+        if (image != null) {
+            return image
+        }
+
+        if (imageFuture != null) {
+            val image: Bitmap = imageFuture.get()
+            this.image = image
+            return image
+        }
+
+        return null
     }
 
     override fun hashCode(): Int {

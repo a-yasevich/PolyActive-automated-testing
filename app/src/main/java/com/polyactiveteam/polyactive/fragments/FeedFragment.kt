@@ -19,6 +19,7 @@ import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
+import com.polyactiveteam.polyactive.room.NewsRepository
 import com.polyactiveteam.polyactive.services.NewsService
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 import kotlin.math.max
@@ -28,6 +29,7 @@ class FeedFragment : Fragment() {
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
     private val adapter = NewsAdapter()
+    private lateinit var news: NewsRepository
 
     companion object {
         private const val LAST_TAB_SELECTED = "Tab"
@@ -37,6 +39,7 @@ class FeedFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentFeedBinding.inflate(layoutInflater)
+        news = NewsRepository(requireContext())
     }
 
     override fun onCreateView(
@@ -53,10 +56,10 @@ class FeedFragment : Fragment() {
                 val map: MutableMap<VkGroup, MutableSet<News>>? = mViewModel.getLiveData().value//FIXME
                 if (adapter.getNewsType() != VkGroup.GROUP_ALL) {
                     val postsFromGroup
-                    = NewsService.getPostsFromGroup(adapter.getNewsType(), 10)
+                    = NewsService.getPostsFromGroup(adapter.getNewsType(), 10, news)
                     adapter.updateGroup(adapter.getNewsType(), postsFromGroup)
                 } else {
-                    val news = NewsService.getPostsFromAllGroups(10)
+                    val news = NewsService.getPostsFromAllGroups(10, news)
                     adapter.addAllItems(news)
                 }
                 swipeContainer.isRefreshing = false

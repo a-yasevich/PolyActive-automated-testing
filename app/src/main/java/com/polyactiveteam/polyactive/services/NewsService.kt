@@ -1,13 +1,17 @@
 package com.polyactiveteam.polyactive.services
 
+import android.app.Application
 import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
+import com.polyactiveteam.polyactive.room.NewsEntity
+import com.polyactiveteam.polyactive.room.NewsRepository
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.concurrent.FutureTask
 
 class NewsService {
     companion object {
@@ -17,7 +21,7 @@ class NewsService {
         private const val getPostsUrl = "https://api.vk.com/method/wall.get"
         private val client = OkHttpClient()
 
-        fun getPostsFromGroup(group: Group, postCount: Int): MutableSet<News> {
+        fun getPostsFromGroup(group: Group, postCount: Int, newsRepository: NewsRepository): MutableSet<News> {
 
             val url: String = getPostsUrl.toHttpUrlOrNull()!!
                 .newBuilder()
@@ -45,15 +49,58 @@ class NewsService {
             }
             thread.start()
             thread.join()
+            newsRepository.insertNews(news.toList().toEntity(group.getId()))
             return news
         }
 
-        fun getPostsFromAllGroups(count: Int): MutableMap<VkGroup, MutableSet<News>> {
+        fun getPostsFromAllGroups(count: Int, news: NewsRepository): MutableMap<VkGroup, MutableSet<News>> {
             return mutableMapOf(
-                VkGroup.ADAPTERS to getPostsFromGroup(VkGroup.ADAPTERS, count),
-                VkGroup.PROF to getPostsFromGroup(VkGroup.PROF, count),
-                VkGroup.STUD_BRIGADES to getPostsFromGroup(VkGroup.STUD_BRIGADES, count)
+                VkGroup.ADAPTERS to getPostsFromGroup(VkGroup.ADAPTERS, count, news),
+                VkGroup.PROF to getPostsFromGroup(VkGroup.PROF, count, news),
+                VkGroup.STUD_BRIGADES to getPostsFromGroup(VkGroup.STUD_BRIGADES, count, news)
             )
+        }
+
+        fun getPostsFromAllGroupsFromDB(news: NewsRepository): MutableMap<VkGroup, MutableSet<News>> {
+            return mutableMapOf(
+                VkGroup.ADAPTERS to newsFromDBInSet(news, VkGroup.ADAPTERS.getId()),
+                VkGroup.PROF to newsFromDBInSet(news, VkGroup.PROF.getId()),
+                VkGroup.STUD_BRIGADES to newsFromDBInSet(news, VkGroup.STUD_BRIGADES.getId())
+            )
+        }
+
+        private fun newsFromDBInSet(news: NewsRepository, groupId: Int): MutableSet<News> {
+            return news.getAllNewsFrom(groupId).toNews().toMutableSet()
+        }
+
+        private fun List<News>.toEntity(groupId: Int): List<NewsEntity> {
+            return this.map { news ->
+                NewsEntity(
+                    id = news.id,
+                    image = news.imageFuture?.get(),
+                    header = news.header,
+                    newsDescription = news.newsDescription,
+                    date = news.date,
+                    dateLong = news.dateLong,
+                    likeCounter = news.likeCounter,
+                    groupId = groupId
+                )
+            }
+        }
+
+        private fun List<NewsEntity>.toNews(): List<News> {
+            return this.map { newsEntity ->
+                News(
+                    id = newsEntity.id,
+                    imageFuture = null,
+                    image = newsEntity.image,
+                    header = newsEntity.header,
+                    newsDescription = newsEntity.newsDescription,
+                    date = newsEntity.date,
+                    dateLong = newsEntity.dateLong,
+                    likeCounter = newsEntity.likeCounter
+                )
+            }
         }
     }
 }

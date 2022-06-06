@@ -26,10 +26,11 @@ class NewsViewerFragment(private val news: News) : Fragment() {
         bottomNavigation.visibility = View.GONE
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         with(binding) {
-            if (news.imageFuture != null) {
-                val image: Bitmap = news.imageFuture.get()
+            val image: Bitmap? = news.getImageBitmap()
+            if (image != null) {
                 newsViewerNewsImage.setImageBitmap(image)
             }
+
             newsViewerHeader.text = news.header
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()
