@@ -3,6 +3,7 @@
     <string name="menu_title_profile">Профиль</string>
     <string name="menu_title_feed">Новости</string>
     <string name="menu_title_settings">Настройки</string>
+    <string name="menu_title_news_viewer">Просмотр</string>
     <string name="tab_item_groups_all">Все</string>
     <string name="tab_item_adapters">Адаптеры</string>
     <string name="tab_item_brigades">Студотряды</string>

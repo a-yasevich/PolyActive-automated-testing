@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -42,7 +43,7 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter.fragmentManager = parentFragmentManager
+        adapter.navController = findNavController()
         binding = FragmentFeedBinding.inflate(inflater, container, false)
         binding.apply {
             newsList.layoutManager = LinearLayoutManager(context)
@@ -55,7 +56,12 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         mViewModel = ViewModelProvider(requireActivity()).get(FeedViewModel::class.java)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_feed)
+        val supportActionBar = (activity as MainActivity).supportActionBar
+        if (supportActionBar != null) {
+            supportActionBar.title = getString(R.string.menu_title_feed)
+            supportActionBar.setDisplayHomeAsUpEnabled(false)
+            supportActionBar.setHomeButtonEnabled(false)
+        }
         val groupsSet: Set<VkGroup> =
             view.context.getSharedPreferences(
                 ProfileFragment.USER_PREFS_FILE_NAME,
