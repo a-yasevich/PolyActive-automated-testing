@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,6 +22,7 @@ class NewsViewerFragment(private val news: News) : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         bottomNavigation = requireActivity().findViewById(R.id.bottom_navigation)
         bottomNavigation.visibility = View.GONE
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)

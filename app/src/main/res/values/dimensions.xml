@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="standard_text">15sp</dimen>
-    <dimen name="small_text">13sp</dimen>
-    <dimen name="header_text">17sp</dimen>
-    <dimen name="news_card_width">330dp</dimen>
-    <dimen name="news_card_height">184dp</dimen>
+    <dimen name="standard_text">16sp</dimen>
+    <dimen name="small_text">14sp</dimen>
+    <dimen name="header_text">18sp</dimen>
+    <dimen name="news_card_width">370dp</dimen>
+    <dimen name="news_card_height">300dp</dimen>
+    <dimen name="news_card_width_with_ten">390dp</dimen>
+    <dimen name="news_card_height_with_ten">315dp</dimen>
+
 </resources>
