@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.polyactiveteam.polyactive.databinding.ActivityMainBinding
 import com.polyactiveteam.polyactive.services.SettingsManager
 
@@ -25,7 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
 
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
+        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
+
+        /*binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_profile -> {
                     navController.navigate(R.id.profile_fragment)
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
-        }
+        }*/
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
