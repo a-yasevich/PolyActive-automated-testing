@@ -81,6 +81,11 @@ class FeedFragment : Fragment() {
             supportActionBar.setHomeButtonEnabled(false)
         }
 
+        if (!NetworkUtils.isInternetAvailable(requireContext())) {
+            Toast.makeText(context, "Network fail", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         mViewModel = ViewModelProvider(requireActivity()).get(FeedViewModel::class.java)
         val groupsSet: Set<VkGroup> =
             view.context.getSharedPreferences(
@@ -89,11 +94,6 @@ class FeedFragment : Fragment() {
             ).getStringSet(ProfileFragment.GROUPS_KEY, emptySet())
                 ?.map { string -> VkGroup.valueOf(string) }
                 ?.toSet() ?: emptySet()
-
-        if (!NetworkUtils.isInternetAvailable(requireContext())) {
-            Toast.makeText(context, "Network fail", Toast.LENGTH_SHORT).show()
-            return
-        }
 
         val tabLayout = binding.tabLayout
 
