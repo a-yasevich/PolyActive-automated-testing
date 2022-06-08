@@ -1,6 +1,7 @@
 package com.polyactiveteam.polyactive.services
 
-import android.app.Application
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
@@ -11,7 +12,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONArray
 import org.json.JSONObject
-import java.util.concurrent.FutureTask
+import java.util.concurrent.Executors
 
 class NewsService {
     companion object {
@@ -20,8 +21,13 @@ class NewsService {
         private const val VERSION = 5.131
         private const val getPostsUrl = "https://api.vk.com/method/wall.get"
         private val client = OkHttpClient()
+        private val service = Executors.newFixedThreadPool(4)
 
-        fun getPostsFromGroup(group: Group, postCount: Int, newsRepository: NewsRepository): MutableSet<News> {
+        fun getPostsFromGroup(
+            group: Group,
+            postCount: Int,
+            newsRepository: NewsRepository
+        ): MutableSet<News> {
 
             val url: String = getPostsUrl.toHttpUrlOrNull()!!
                 .newBuilder()
@@ -53,7 +59,10 @@ class NewsService {
             return news
         }
 
-        fun getPostsFromAllGroups(count: Int, news: NewsRepository): MutableMap<VkGroup, MutableSet<News>> {
+        fun getPostsFromAllGroups(
+            count: Int,
+            news: NewsRepository
+        ): MutableMap<VkGroup, MutableSet<News>> {
             return mutableMapOf(
                 VkGroup.ADAPTERS to getPostsFromGroup(VkGroup.ADAPTERS, count, news),
                 VkGroup.PROF to getPostsFromGroup(VkGroup.PROF, count, news),
@@ -77,7 +86,11 @@ class NewsService {
             return this.map { news ->
                 NewsEntity(
                     id = news.id,
-                    image = news.imageFuture?.get(),
+                    image = service.submit<Bitmap> {
+                        return@submit BitmapFactory.decodeStream(
+                            news.imageURL?.openConnection()?.getInputStream()
+                        )
+                    }.get(),
                     header = news.header,
                     newsDescription = news.newsDescription,
                     date = news.date,
@@ -92,7 +105,7 @@ class NewsService {
             return this.map { newsEntity ->
                 News(
                     id = newsEntity.id,
-                    imageFuture = null,
+                    imageURL = null,
                     image = newsEntity.image,
                     header = newsEntity.header,
                     newsDescription = newsEntity.newsDescription,
