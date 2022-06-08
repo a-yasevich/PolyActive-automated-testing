@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,10 +23,9 @@ import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
 import com.polyactiveteam.polyactive.model.Group
 import com.polyactiveteam.polyactive.model.VkGroup
+import com.polyactiveteam.polyactive.utils.NetworkUtils
 import java.net.URL
 import java.util.*
-import kotlin.String
-import kotlin.with
 
 class ProfileFragment : Fragment() {
 
@@ -72,17 +72,20 @@ class ProfileFragment : Fragment() {
             if (googleLastName != null) {
                 user.lastName = googleLastName
             }
-
-            if (googleProfilePicURL != null) {
-                Thread {
-                    val url = URL(googleProfilePicURL.toString())
-                    user.googleProfilePicBitmap =
-                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    requireActivity().runOnUiThread {
-                        binding.icProfile.findViewById<ImageView>(R.id.avatar_image)
-                            .setImageBitmap(user.googleProfilePicBitmap)
-                    }
-                }.start()
+            if (!NetworkUtils.isInternetAvailable(requireContext())) {
+                Toast.makeText(context, "Network fail", Toast.LENGTH_SHORT).show()
+            } else {
+                if (googleProfilePicURL != null) {
+                    Thread {
+                        val url = URL(googleProfilePicURL.toString())
+                        user.googleProfilePicBitmap =
+                            BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                        requireActivity().runOnUiThread {
+                            binding.icProfile.findViewById<ImageView>(R.id.avatar_image)
+                                .setImageBitmap(user.googleProfilePicBitmap)
+                        }
+                    }.start()
+                }
             }
         }
 

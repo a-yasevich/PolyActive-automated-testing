@@ -8,7 +8,6 @@ import java.util.*
 
 data class News(
     val imageLink: String?,
-    val header: String,
     val newsDescription: String,
     val date: String,
     val likeCounter: Int
@@ -18,7 +17,6 @@ data class News(
 
         fun getNewsFromJson(json: JSONObject): News {
             val text: String = json.getString("text")
-            val header = text.substring(0, 20) + "..."
             val attachments: JSONArray = json.getJSONArray("attachments")
             var imageLink: String? = null
             if (attachments.length() != 0) {
@@ -34,7 +32,7 @@ data class News(
             }
             val date: String = formatter.format(Date(json.getLong("date") * 1000))
             val likes: Int = json.getJSONObject("likes").getInt("count")
-            return News(imageLink, header, text, date, likes)
+            return News(imageLink, text, date, likes)
         }
     }
 }
