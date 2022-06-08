@@ -34,6 +34,6 @@
         <item name="dark">Темная</item>
     </string-array>
 
-    <string name="chooseLanguage">Selected language is</string>
-    <string name="chooseTheme">Selected theme is</string>
+    <string name="chooseLanguage">Selected language is English</string>
+    <string name="chooseTheme">В качестве темы выбрана</string>
 </resources>

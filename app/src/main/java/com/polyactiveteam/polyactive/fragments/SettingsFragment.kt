@@ -65,8 +65,7 @@ class SettingsFragment : Fragment() {
                     activity?.recreate()
                     Toast.makeText(
                         context,
-                        resources.getString(R.string.chooseLanguage) + " "
-                                + resources.getStringArray(R.array.languages)[p2],
+                        resources.getString(R.string.chooseLanguage),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
