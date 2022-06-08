@@ -50,6 +50,8 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.show()
         adapter.navController = findNavController()
         binding = FragmentFeedBinding.inflate(inflater, container, false)
         binding.apply {

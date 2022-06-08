@@ -94,7 +94,6 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
             }
 
             newsCardNewsHeader?.text = news.header
-            newsCardSmallDescription.text = news.newsDescription
             newsCardNewsDate.text = news.date
             binding.newsCard.setOnClickListener {
                 val bundle: Bundle = bundleOf(
