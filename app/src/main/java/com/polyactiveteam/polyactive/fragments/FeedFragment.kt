@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -19,6 +20,7 @@ import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.adapters.NewsAdapter
 import com.polyactiveteam.polyactive.databinding.FragmentFeedBinding
 import com.polyactiveteam.polyactive.model.VkGroup
+import com.polyactiveteam.polyactive.utils.NetworkUtils
 import com.polyactiveteam.polyactive.viewmodels.FeedViewModel
 import kotlin.math.max
 
@@ -26,8 +28,6 @@ class FeedFragment : Fragment() {
 
     private lateinit var binding: FragmentFeedBinding
     private lateinit var mViewModel: FeedViewModel
-    private var lastSelectedTab: Int? = 0
-    private var lastVisibleNews: Int? = 0
     private val adapter = NewsAdapter()
 
     companion object {
@@ -45,8 +45,9 @@ class FeedFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        adapter.fragmentManager = parentFragmentManager
+        adapter.navController = findNavController()
         binding = FragmentFeedBinding.inflate(inflater, container, false)
         binding.apply {
             newsList.layoutManager = LinearLayoutManager(context)
@@ -58,8 +59,19 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
-        mViewModel = ViewModelProvider(this).get(FeedViewModel::class.java)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_feed)
+        val supportActionBar = (activity as MainActivity).supportActionBar
+        if (supportActionBar != null) {
+            supportActionBar.title = getString(R.string.menu_title_feed)
+            supportActionBar.setDisplayHomeAsUpEnabled(false)
+            supportActionBar.setHomeButtonEnabled(false)
+        }
+        if (!NetworkUtils.isInternetAvailable(requireContext())) {
+            Toast.makeText(context, "Network fail", Toast.LENGTH_SHORT).show()
+            // TO-DO Заполнение без интернета
+            return
+        }
+
+        mViewModel = ViewModelProvider(requireActivity()).get(FeedViewModel::class.java)
         val groupsSet: Set<VkGroup> =
             view.context.getSharedPreferences(
                 ProfileFragment.USER_PREFS_FILE_NAME,
@@ -92,8 +104,6 @@ class FeedFragment : Fragment() {
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
-        lastSelectedTab = savedInstanceState?.getInt(LAST_TAB_SELECTED)
-        lastVisibleNews = savedInstanceState?.getInt(LAST_NEWS_VISIBLE)
 
         mViewModel.getLiveData().observe(viewLifecycleOwner, adapter::addAllItems)
     }
@@ -111,23 +121,31 @@ class FeedFragment : Fragment() {
         }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+    override fun onStop() {
+        super.onStop()
+        if (!NetworkUtils.isInternetAvailable(requireContext())) {
+            return
+        }
         with(binding) {
-            val manager = newsList.layoutManager
+            val manager = newsList.layoutManager as LinearLayoutManager?
             manager?.let {
-                val newsVisible = (manager as LinearLayoutManager).findLastVisibleItemPosition()
-                outState.putInt(LAST_NEWS_VISIBLE, newsVisible)
+                mViewModel.newsVisible = max(
+                    it.findFirstCompletelyVisibleItemPosition(),
+                    it.findFirstVisibleItemPosition()
+                )
             }
-            outState.putInt(LAST_TAB_SELECTED, tabLayout.selectedTabPosition)
+            mViewModel.tabSelected = tabLayout.selectedTabPosition
         }
     }
 
     override fun onResume() {
         super.onResume()
+        if (!NetworkUtils.isInternetAvailable(requireContext())) {
+            return
+        }
         with(binding) {
-            tabLayout.selectTab(lastSelectedTab?.let { tabLayout.getTabAt(it) })
-            lastVisibleNews?.let { newsList.layoutManager?.scrollToPosition(it) }
+            mViewModel.tabSelected?.let { tabLayout.selectTab(tabLayout.getTabAt(it)) }
+            mViewModel.newsVisible?.let { newsList.layoutManager?.scrollToPosition(it) }
         }
     }
 

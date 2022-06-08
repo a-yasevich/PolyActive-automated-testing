@@ -24,11 +24,6 @@ class SettingsFragment : Fragment() {
         const val KEY_THEME = "theme"
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_settings)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +31,11 @@ class SettingsFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.show()
         binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
-        // Inflate the layout for this fragment
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.menu_title_settings)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

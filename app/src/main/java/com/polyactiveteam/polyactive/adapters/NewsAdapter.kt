@@ -1,15 +1,15 @@
 package com.polyactiveteam.polyactive.adapters
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.core.os.bundleOf
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.NewsItemBinding
-import com.polyactiveteam.polyactive.fragments.NewsViewerFragment
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
 
@@ -17,7 +17,7 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
 
     private val news = mutableMapOf<VkGroup, List<News>>()
     private var currentNewsType = VkGroup.GROUP_ALL
-    lateinit var fragmentManager: FragmentManager
+    lateinit var navController: NavController
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
         return NewsHolder(
@@ -25,7 +25,7 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
                 R.layout.news_item,
                 parent,
                 false
-            ), this.fragmentManager
+            ), this.navController
         )
     }
 
@@ -51,7 +51,7 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
         this.news[VkGroup.GROUP_ALL] = allNews
     }
 
-    class NewsHolder(itemView: View, private val fragmentManager: FragmentManager) :
+    class NewsHolder(itemView: View, private val navController: NavController) :
         RecyclerView.ViewHolder(itemView) {
 
         private val binding = NewsItemBinding.bind(itemView)
@@ -66,16 +66,14 @@ class NewsAdapter() : RecyclerView.Adapter<NewsAdapter.NewsHolder>() {
             newsCardNewsHeader.text = news.header
             newsCardNewsDate.text = news.date
             binding.newsCard.setOnClickListener {
-                setFragment(NewsViewerFragment(news))
+                val bundle: Bundle = bundleOf(
+                    "imageLink" to news.imageLink,
+                    "newsDescription" to news.newsDescription,
+                    "date" to news.date,
+                    "likeCounter" to news.likeCounter,
+                )
+                navController.navigate(R.id.action_feed_fragment_to_news_viewer, bundle)
             }
-        }
-
-        private fun setFragment(fragment: Fragment) {
-            fragmentManager.beginTransaction()
-                .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack("feed_fragment")
-                .commit()
         }
     }
 }

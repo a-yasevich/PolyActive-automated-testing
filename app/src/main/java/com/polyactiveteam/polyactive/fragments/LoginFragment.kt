@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentLoginBinding
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
+import com.polyactiveteam.polyactive.utils.NetworkUtils
 
 class LoginFragment : Fragment() {
 
@@ -57,6 +58,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun signInWithGoogle() {
+        if (!NetworkUtils.isInternetAvailable(requireContext())) {
+            Toast.makeText(context, "Network fail", Toast.LENGTH_SHORT).show()
+        }
         val signIntent: Intent = gsc.signInIntent
         startActivityForResult(signIntent, RC_SIGN_IN)
     }
