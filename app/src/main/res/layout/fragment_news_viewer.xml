@@ -4,23 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_news_viewer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/fragment_news_viewer">
+    android:layout_height="match_parent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="14dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="14dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="4dp">
@@ -48,7 +47,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/news_viewer_toolbar"
-                    tools:background="@drawable/ic_news_plug"/>
+                    tools:background="@drawable/ic_news_plug" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/news_card__news_layout"
@@ -84,8 +83,8 @@
                     android:id="@+id/news_viewer__news_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="24dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/news_viewer__description"
