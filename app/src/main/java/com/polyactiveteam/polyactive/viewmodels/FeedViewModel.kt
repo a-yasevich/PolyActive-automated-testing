@@ -6,23 +6,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.polyactiveteam.polyactive.model.News
 import com.polyactiveteam.polyactive.model.VkGroup
+import com.polyactiveteam.polyactive.room.NewsRepository
 import com.polyactiveteam.polyactive.services.NewsService
 
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
     var tabSelected: Int? = null
     var newsVisible: Int? = null
-    private val newsLiveData = MutableLiveData<Map<VkGroup, List<News>>>()
+    private val newsLiveData = MutableLiveData<MutableMap<VkGroup, MutableSet<News>>>()
+    private val news = NewsRepository(application.applicationContext)
 
     init {
-        val plugMap = mapOf(
-            VkGroup.ADAPTERS to NewsService.getPostsFromGroup(VkGroup.ADAPTERS, 2),
-            VkGroup.PROF to NewsService.getPostsFromGroup(VkGroup.PROF, 2),
-            VkGroup.STUD_BRIGADES to NewsService.getPostsFromGroup(VkGroup.STUD_BRIGADES, 2)
-        )
+        val plugMap = if (news.getCount() == 0) {
+            NewsService.getPostsFromAllGroups(5, news)
+        } else {
+            NewsService.getPostsFromAllGroupsFromDB(news)
+        }
+
         newsLiveData.value = plugMap
     }
 
-    fun getLiveData(): LiveData<Map<VkGroup, List<News>>> {
+    fun getLiveData(): LiveData<MutableMap<VkGroup, MutableSet<News>>> {
         return newsLiveData
     }
 }
