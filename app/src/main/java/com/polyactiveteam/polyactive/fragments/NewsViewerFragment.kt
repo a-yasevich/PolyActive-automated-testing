@@ -1,6 +1,7 @@
 package com.polyactiveteam.polyactive.fragments
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +37,9 @@ class NewsViewerFragment(private val news: News) : Fragment() {
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()
             newsViewerDate.text = news.date
+            newsViewerDescription.movementMethod = ScrollingMovementMethod()
         }
-        return binding.root
+            return binding.root
     }
 
     override fun onDetach() {

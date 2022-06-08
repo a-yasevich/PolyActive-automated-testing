@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="forest_green">#1B8C37</color>
-    <color name="whisper">#F3F3F9</color>
-    <color name="titan_white">#FBFBFF</color>
-    <color name="silver">#C4C4C4</color>
-    <color name="light_silver">#CDDCDCDC</color>
-    <color name="lunar_green">#39453B</color>
-    <color name="light_grey">#ececec</color>
-    <color name="black">#000000</color>
-    <color name="dark_grey">#515C54</color>
-    <color name="red_sign_out">#DC0707</color>
+    <color name="logo">#4A4949</color>
+    <color name="primary">#4CAF50</color>
+    <color name="primary_dark">#388E3C</color>
+    <color name="primary_light">#C8E6C9</color>
+    <color name="accent">#4CAF50</color>
+    <color name="primary_text">#FFFFFF</color>
+    <color name="secondary_text">#B1AFAF</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="red_sign_out">#E81D1D</color>
+    <color name="background_color">#111111</color>
 </resources>
