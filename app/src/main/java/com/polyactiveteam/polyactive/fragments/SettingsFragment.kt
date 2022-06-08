@@ -99,7 +99,8 @@ class SettingsFragment : Fragment() {
                     activity?.recreate()
                     Toast.makeText(
                         context,
-                        R.string.chooseTheme,
+                        resources.getString(R.string.chooseTheme) + " "
+                                + resources.getStringArray(R.array.theme)[p2],
                         Toast.LENGTH_SHORT
                     ).show()
                 }
