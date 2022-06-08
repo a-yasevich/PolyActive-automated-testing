@@ -3,8 +3,13 @@ package com.polyactiveteam.polyactive.fragments
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import android.view.*
 import android.widget.TextView
+
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,6 +34,7 @@ class NewsViewerFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         this.setHasOptionsMenu(true)
         val supportActionBar = (activity as MainActivity).supportActionBar
         if (supportActionBar != null) {
@@ -58,8 +64,8 @@ class NewsViewerFragment : Fragment() {
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()
             newsViewerDate.text = news.date
+            newsViewerDescription.movementMethod = ScrollingMovementMethod()
         }
-
         return binding.root
     }
 

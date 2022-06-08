@@ -16,9 +16,26 @@
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
     <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="tittle_profile">Select the categories\nwhose news you want to filter</string>
     <string name="adapters_name">Adapters</string>
     <string name="students_brigades_name">Brigades</string>
     <string name="prof_name">Prof</string>
     <string name="profileImage">Profile image</string>
     <string name="exit">Exit</string>
+    <string name="language_app">App language</string>
+    <string name="theme_app">App theme</string>
+
+    <string-array name="languages">
+        <item name="russian">Russian</item>
+        <item name="english">English</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item name="light">Light</item>
+        <item name="dark">Dark</item>
+    </string-array>
+
+    <string name="chooseLanguage">В качестве языка выбран Русский</string>
+    <string name="chooseTheme">Selected theme is</string>
+
 </resources>

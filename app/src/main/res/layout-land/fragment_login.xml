@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_login"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center">
+    android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/ic_polytech"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:layout_gravity="center"
+        android:layout_marginTop="60dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/ic_polyactive_logo"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,16 +32,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ic_polytech" />
 
-
-    <!-- Кнопка для дебага и тестирования, к релизу должна быть убрана или скрыта -->
-
     <androidx.cardview.widget.CardView
         android:id="@+id/google_sign"
         android:layout_width="260dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:layout_marginTop="104dp"
-        app:cardCornerRadius="7dp"
+        android:layout_marginTop="80dp"
+        app:cardCornerRadius="30dp"
         app:cardElevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -64,14 +61,12 @@
     </androidx.cardview.widget.CardView>
 
     <Button
-        android:id = "@+id/shadow_button"
+        android:id="@+id/shadow_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/google_sign" />
-        app:layout_constraintTop_toBottomOf="@id/google_sign_in_button"
-        app:layout_constraintStart_toStartOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

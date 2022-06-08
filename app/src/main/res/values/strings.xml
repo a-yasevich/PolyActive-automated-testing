@@ -16,9 +16,25 @@
     <string name="like_image_content_description">like_image</string>
     <string name="news_image_content_description">news_image</string>
     <string name="sign_in_with_google">Войти с помощью Google</string>
+    <string name="tittle_profile">Выберете категории,\nновости которых хотите выделить</string>
     <string name="adapters_name">Адаптеры</string>
-    <string name="students_brigades_name">Студотряды</string>
-    <string name="prof_name">Проф</string>
+    <string name="students_brigades_name">Бригады университета</string>
+    <string name="prof_name">Профсоюзная организация</string>
     <string name="profileImage">Фото профиля</string>
     <string name="exit">Выйти</string>
+    <string name="language_app">Язык приложения</string>
+    <string name="theme_app">Тема приложения</string>
+
+    <string-array name="languages">
+        <item name="russian">Русский</item>
+        <item name="english">Английский</item>
+    </string-array>
+
+    <string-array name="theme">
+        <item name="light">Светлая</item>
+        <item name="dark">Темная</item>
+    </string-array>
+
+    <string name="chooseLanguage">Selected language is English</string>
+    <string name="chooseTheme">В качестве темы выбрана</string>
 </resources>

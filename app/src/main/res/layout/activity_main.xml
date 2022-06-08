@@ -22,6 +22,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/fragment_container"
         app:menu="@menu/navigation_items" />
 </androidx.constraintlayout.widget.ConstraintLayout>

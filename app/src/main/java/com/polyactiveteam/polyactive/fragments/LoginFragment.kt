@@ -44,9 +44,6 @@ class LoginFragment : Fragment() {
         if (account != null) {
             findNavController().navigate(R.id.from_login_to_feed)
         }
-        binding.shadowButton.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_feed)
-        }
         return binding.root
     }
 
@@ -54,6 +51,9 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.googleSignInButton.setOnClickListener {
             signInWithGoogle()
+        }
+        binding.shadowButton.setOnClickListener {
+            findNavController().navigate(R.id.from_login_to_feed)
         }
     }
 
