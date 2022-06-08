@@ -1,23 +1,28 @@
 package com.polyactiveteam.polyactive.fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.view.*
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.polyactiveteam.polyactive.MainActivity
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentNewsViewerBinding
 import com.polyactiveteam.polyactive.model.News
+import java.net.URL
 
-
-class NewsViewerFragment() : Fragment() {
+class NewsViewerFragment : Fragment() {
 
     private lateinit var binding: FragmentNewsViewerBinding
     private lateinit var bottomNavigation: BottomNavigationView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = FragmentNewsViewerBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,17 +40,21 @@ class NewsViewerFragment() : Fragment() {
         bottomNavigation.visibility = View.GONE
         binding = FragmentNewsViewerBinding.inflate(inflater, container, false)
         val news = News(
-            arguments?.getString("imageLink"),
+            arguments?.getInt("id")!!,
+            arguments?.get("imageURL") as URL?,
+            arguments?.get("image") as Bitmap?,
+            arguments?.getString("header")!!,
             arguments?.getString("newsDescription")!!,
             arguments?.getString("date")!!,
+            arguments?.getLong("dateLong")!!,
             arguments?.getInt("likeCounter")!!
         )
         with(binding) {
-            if (news.imageLink != null) {
-                Glide.with(this@NewsViewerFragment)
-                    .load(news.imageLink)
-                    .into(newsViewerNewsImage)
+            val image: Bitmap? = news.getImageBitmap()
+            if (image != null) {
+                newsViewerNewsImage.setImageBitmap(image)
             }
+
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()
             newsViewerDate.text = news.date
