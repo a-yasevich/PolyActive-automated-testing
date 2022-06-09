@@ -38,4 +38,6 @@
     <string name="chooseLanguage">В качестве языка выбран Русский</string>
     <string name="chooseTheme">Selected theme is</string>
 
+    <string name="menu_title_news_viewer">Looking</string>
+
 </resources>
