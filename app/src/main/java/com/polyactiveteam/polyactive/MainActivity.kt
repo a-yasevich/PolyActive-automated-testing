@@ -26,9 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
 
-        NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
-
-        /*binding.bottomNavigation.setOnItemSelectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_profile -> {
                     navController.navigate(R.id.profile_fragment)
@@ -41,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
-        }*/
+        }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
