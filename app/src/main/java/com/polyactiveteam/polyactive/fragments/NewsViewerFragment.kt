@@ -60,11 +60,13 @@ class NewsViewerFragment : Fragment() {
             if (image != null) {
                 newsViewerNewsImage.setImageBitmap(image)
             }
-
             newsViewerDescription.text = news.newsDescription
             newsViewerLikeCount.text = news.likeCounter.toString()
             newsViewerDate.text = news.date
             newsViewerDescription.movementMethod = ScrollingMovementMethod()
+            newsViewerToolbar.setNavigationOnClickListener {
+                getBack()
+            }
         }
         return binding.root
     }
