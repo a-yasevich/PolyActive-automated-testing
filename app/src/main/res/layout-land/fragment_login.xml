@@ -60,13 +60,4 @@
             app:drawableLeftCompat="@drawable/common_google_signin_btn_icon_light" />
     </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/shadow_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/google_sign" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

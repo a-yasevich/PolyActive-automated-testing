@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.polyactiveteam.polyactive.databinding.ActivityMainBinding
 import com.polyactiveteam.polyactive.services.SettingsManager
 
