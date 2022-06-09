@@ -52,9 +52,6 @@ class LoginFragment : Fragment() {
         binding.googleSignInButton.setOnClickListener {
             signInWithGoogle()
         }
-        binding.shadowButton.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_feed)
-        }
     }
 
     private fun signInWithGoogle() {
