@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ic_polytech"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_polyactive_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/app_name"
+        android:textColor="@color/logo"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/google_sign"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ic_polytech" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/google_sign"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_name">
+
+        <TextView
+            android:id="@+id/google_sign_in_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_button_signin_selector"
+            android:contentDescription="@string/sign_in_with_google"
+            android:gravity="center"
+            android:text="@string/sign_in_with_google"
+            android:textColor="@color/primary_text"
+            android:textSize="@dimen/standard_text"
+            android:textStyle="bold"
+            app:drawableLeftCompat="@drawable/common_google_signin_btn_icon_light" />
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

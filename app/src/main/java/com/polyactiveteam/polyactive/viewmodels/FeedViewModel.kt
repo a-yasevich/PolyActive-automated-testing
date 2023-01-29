@@ -2,36 +2,30 @@ package com.polyactiveteam.polyactive.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.model.News
+import com.polyactiveteam.polyactive.model.VkGroup
+import com.polyactiveteam.polyactive.room.NewsRepository
+import com.polyactiveteam.polyactive.services.NewsService
 
 class FeedViewModel(application: Application) : AndroidViewModel(application) {
-
-    val newsLiveData = MutableLiveData<ArrayList<News>>()
+    var tabSelected: Int? = null
+    var newsVisible: Int? = null
+    private val newsLiveData = MutableLiveData<MutableMap<VkGroup, MutableSet<News>>>()
+    private val news = NewsRepository(application.applicationContext)
 
     init {
-        newsLiveData.apply {
-            val plugList = ArrayList<News>()
-            plugList.add(
-                News(
-                    R.drawable.ic_news_plug,
-                    "Новый RecycleView",
-                    "Команда PolyActive добавила RecycleView к своему проекту",
-                    1648329900,
-                    0
-                )
-            )
-            plugList.add(
-                News(
-                    R.drawable.ic_heart_plug,
-                    "Крутая новость",
-                    "Новость действительно крутая",
-                    1648375200,
-                    0
-                )
-            )
-            newsLiveData.value = plugList
+        val plugMap = if (news.getCount() == 0) {
+            NewsService.getPostsFromAllGroups(5, news)
+        } else {
+            NewsService.getPostsFromAllGroupsFromDB(news)
         }
+
+        newsLiveData.value = plugMap
+    }
+
+    fun getLiveData(): LiveData<MutableMap<VkGroup, MutableSet<News>>> {
+        return newsLiveData
     }
 }

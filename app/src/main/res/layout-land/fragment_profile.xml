@@ -10,9 +10,9 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_gravity="center"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_gravity="center">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,26 +23,79 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.25" />
+                app:layout_constraintGuide_percent="0.10" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_right"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.75" />
+                app:layout_constraintGuide_percent="0.9" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.05" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_20"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.15" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_40"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.4" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_50"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.55" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_60"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.7" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_70"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_up_0_80"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/ic_profile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
+                android:elevation="8dp"
                 app:cardCornerRadius="100dp"
-                app:layout_constraintStart_toStartOf="@id/guideline_left"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintBottom_toTopOf="@id/guideline_up_0_20"
+                app:layout_constraintStart_toEndOf="@+id/guideline_left"
+                app:layout_constraintTop_toTopOf="@+id/guideline_up_0_10">
 
                 <ImageView
+                    android:id="@+id/avatar_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/profileImage"
@@ -54,148 +107,179 @@
                 android:id="@+id/user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:textSize="@dimen/header_text"
-                app:layout_constraintEnd_toStartOf="@id/guideline_right"
+                android:textSize="@dimen/standard_text"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_20"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintHorizontal_bias="0.437"
                 app:layout_constraintStart_toEndOf="@id/ic_profile"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline_up_0_10"
                 tools:text="Имя Фамилия" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:padding="10dp"
+                android:text="@string/tittle_profile"
+                android:textColor="@color/secondary_text"
+                android:textSize="@dimen/header_text"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_40"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/adapters_name"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_50"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/guideline_up_0_40" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/adapters_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/ic_group_button_deactive"
+                android:elevation="8dp"
                 android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ic_profile"
-                app:layout_constraintWidth_percent="0.5">
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_50"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintRight_toRightOf="@id/guideline_right"
+                app:layout_constraintTop_toTopOf="@+id/guideline_up_0_40"
+                app:layout_constraintWidth_percent="0.7">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ic_adapters"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="100dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:contentDescription="@string/adapters_name"
                         android:src="@drawable/ic_adapters" />
 
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/adapters_name"
-                    android:textSize="@dimen/header_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ic_adapters"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:padding="10dp"
+                android:text="@string/students_brigades_name"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_60"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/guideline_up_0_50" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/brigades_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/ic_group_button_deactive"
+                android:elevation="8dp"
                 android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/adapters_button"
-                app:layout_constraintWidth_percent="0.5">
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_60"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintTop_toTopOf="@+id/guideline_up_0_50"
+                app:layout_constraintWidth_percent="0.7">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ic_brigades"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="100dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:elevation="10dp"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:contentDescription="@string/students_brigades_name"
                         android:src="@drawable/ic_students_brigades" />
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/students_brigades_name"
-                    android:textSize="@dimen/header_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ic_brigades"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/prof_name"
+                android:textColor="@color/primary_text"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_70"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/guideline_up_0_60" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/prof_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/ic_group_button_deactive"
+                android:elevation="8dp"
                 android:padding="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/brigades_button"
-                app:layout_constraintWidth_percent="0.5">
+                app:layout_constraintBottom_toTopOf="@+id/guideline_up_0_70"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintTop_toTopOf="@+id/guideline_up_0_60"
+                app:layout_constraintWidth_percent="0.7">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/ic_prof"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="8dp"
-                    app:cardCornerRadius="100dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:cardCornerRadius="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center"
                         android:contentDescription="@string/prof_name"
                         android:src="@drawable/ic_prof" />
+
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/prof_name"
-                    android:textSize="@dimen/header_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ic_prof"
-                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/button_exit"
                 android:layout_width="250dp"
                 android:layout_height="60dp"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/ic_button_rounded_login_style"
+                android:background="@android:color/transparent"
                 android:padding="12dp"
                 android:text="@string/exit"
+                android:textAllCaps="false"
+                android:textColor="@color/red_sign_out"
                 android:textSize="@dimen/standard_text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/prof_button" />
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintStart_toStartOf="@+id/guideline_left"
+                app:layout_constraintTop_toTopOf="@id/guideline_up_0_80" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

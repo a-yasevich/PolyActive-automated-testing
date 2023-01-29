@@ -19,9 +19,9 @@ import com.google.android.gms.tasks.Task
 import com.polyactiveteam.polyactive.R
 import com.polyactiveteam.polyactive.databinding.FragmentLoginBinding
 import com.polyactiveteam.polyactive.databinding.FragmentProfileBinding
+import com.polyactiveteam.polyactive.utils.NetworkUtils
 
-
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
     private lateinit var profileBinding: FragmentProfileBinding
@@ -44,9 +44,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         if (account != null) {
             findNavController().navigate(R.id.from_login_to_feed)
         }
-        binding.shadowButton.setOnClickListener {
-            findNavController().navigate(R.id.from_login_to_feed)
-        }
         return binding.root
     }
 
@@ -58,6 +55,9 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun signInWithGoogle() {
+        if (!NetworkUtils.isInternetAvailable(requireContext())) {
+            Toast.makeText(context, "Network fail", Toast.LENGTH_SHORT).show()
+        }
         val signIntent: Intent = gsc.signInIntent
         startActivityForResult(signIntent, RC_SIGN_IN)
     }

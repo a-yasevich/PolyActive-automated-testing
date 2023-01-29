@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/feed_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabMaxWidth="2000dp"
+        app:tabMode="auto">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/tab_item_group_1" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/tab_item_group_2" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/tab_item_group_3" />
-
+            android:text="@string/tab_item_groups_all" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/news_list"
-        android:layout_width="wrap_content"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeContainer"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+        app:layout_constraintLeft_toLeftOf="@id/tab_layout"
+        app:layout_constraintLeft_toRightOf="@id/tab_layout"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/news_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_layout"
+            app:layout_constraintVertical_bias="0.0">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
